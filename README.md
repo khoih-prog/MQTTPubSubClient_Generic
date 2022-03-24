@@ -14,7 +14,8 @@
 * [Why do we need this MQTTPubSubClient_Generic library](#why-do-we-need-this-MQTTPubSubClient_Generic-library)
   * [Features](#features)
   * [Currently supported Boards](#currently-supported-boards)
-  * [To-be-supported Boards](#To-be-supported-Boards)
+  * [Currently supported WiFi shields/modules](#Currently-supported-WiFi-shieldsmodules)
+  * [Currently supported Ethernet shields/modules](#Currently-supported-Ethernet-shieldsmodules)
 * [Changelog](changelog.md)
 * [Prerequisites](#prerequisites)
 * [Installation](#installation)
@@ -58,7 +59,6 @@
   * [MQTT with Secure Connection](#MQTT-with-Secure-Connection)
   * [Callback Signature](#Callback-Signature)
   * [Send and Receive Buffer Size Management](#Send-and-Receive-Buffer-Size-Management)
-  * [MQTT with Secure Connection](#MQTT-with-Secure-Connection)
 * [APIs](#APIs)
 * [HOWTO use STM32F4 with LAN8720](#howto-use-stm32f4-with-lan8720)
   * [1. Wiring](#1-wiring)
@@ -84,17 +84,14 @@
   * [1. File EtherMQTToverWebSocket.ino](#1-file-EtherMQTToverWebSocketino)
   * [2. File defines.h](#2-file-definesh)
 * [Debug Terminal Output Samples](#debug-terminal-output-samples)
-  * [ 1. FullyFeature_ESP8266 on ESP8266_NODEMCU_ESP12E](#1-FullyFeature_ESP8266-on-ESP8266_NODEMCU_ESP12E) 
-  * [ 2. FullyFeature_ESP32 on ESP32_DEV](#2-FullyFeature_ESP32-on-ESP32_DEV)
-  * [ 3. FullyFeatureSSL_ESP32 on ESP32_DEV](#3-FullyFeatureSSL_ESP32-on-ESP32_DEV) 
-  * [ 4. FullyFeatureSSL_ESP32 on ESP32_DEV with _ASYNC_MQTT_LOGLEVEL_](#4-fullyfeaturessl_esp32-on-esp32_dev-with-async_mqtt_loglevel)
-  * [ 5. FullyFeatureSSL_WT32_ETH01 on WT32-ETH01 with ETH_PHY_LAN8720](#5-FullyFeatureSSL_WT32_ETH01-on-WT32-ETH01-with-ETH_PHY_LAN8720)
-  * [ 6. FullyFeature_STM32 on NUCLEO_F767ZI](#6-FullyFeature_STM32-on-NUCLEO_F767ZI)
-  * [ 7. FullyFeature_STM32 on NUCLEO_F767ZI with _ASYNC_MQTT_LOGLEVEL_](#7-fullyfeature_stm32-on-nucleo_f767zi-with-async_mqtt_loglevel)
-  * [ 8. FullyFeatured_STM32_LAN8720 on BLACK_F407VE](#8-FullyFeatured_STM32_LAN8720-on-BLACK_F407VE)
-  * [ 9. FullyFeatured_PortentaH7_WiFi on PORTENTA_H7_M7](#9-FullyFeatured_PortentaH7_WiFi-on-PORTENTA_H7_M7)
-  * [10. FullyFeatured_Portenta_H7_Ethernet on PORTENTA_H7_M7](#10-FullyFeatured_Portenta_H7_Ethernet-on-PORTENTA_H7_M7)
-  * [11. FullyFeatured_QNEthernet on TEENSY 4.1 using QNEthernet](#11-FullyFeatured_QNEthernet-on-TEENSY-41-using-QNEthernet)
+  * [ 1. WiFiMQTToverWebSocket on ESP8266_NODEMCU_ESP12E](#1-WiFiMQTToverWebSocket-on-ESP8266_NODEMCU_ESP12E) 
+  * [ 2. WiFiMQTToverWebSocketSecure on ESP32_DEV](#2-WiFiMQTToverWebSocketSecure-on-ESP32_DEV)
+  * [ 3. WiFiMQTToverWebSocket on SAMD_NANO_33_IOT](#3-WiFiMQTToverWebSocket-on-SAMD_NANO_33_IOT) 
+  * [ 4. EtherMQTToverWebSocket on NUCLEO_F767ZI](#4-EtherMQTToverWebSocket-on-NUCLEO_F767ZI)
+  * [ 5. EtherMQTToverWebSocket_STM32 on NUCLEO_F767ZI](#5-EtherMQTToverWebSocket_STM32-on-NUCLEO_F767ZI)
+  * [ 6. MQTToverWebSocket_QNEthernet on TEENSY 4.1](#6-MQTToverWebSocket_QNEthernet-on-TEENSY-41)
+  * [ 7. EtherMQTToverWebSocket on MBED RASPBERRY_PI_PICO](#7-EtherMQTToverWebSocket-on-MBED-RASPBERRY_PI_PICO)
+  * [ 8. EtherMQTToverWebSocket on RASPBERRY_PI_PICO](#8-EtherMQTToverWebSocket-on-RASPBERRY_PI_PICO)
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
@@ -539,6 +536,87 @@ Whenever a new version is installed, remember to copy this file into the new ver
 This file must be copied into the directory:
 
 - `~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/x.yy.zz/boards.txt`
+
+
+---
+---
+
+### Libraries' Patches
+
+#### 1. For application requiring 2K+ HTML page
+
+If your application requires 2K+ HTML page, the current [`Ethernet library`](https://www.arduino.cc/en/Reference/Ethernet) must be modified if you are using W5200/W5500 Ethernet shields. W5100 is not supported for 2K+ buffer. If you use boards requiring different CS/SS pin for W5x00 Ethernet shield, for example ESP32, ESP8266, nRF52, etc., you also have to modify the following libraries to be able to specify the CS/SS pin correctly.
+
+#### 2. For Ethernet library
+
+To fix [`Ethernet library`](https://www.arduino.cc/en/Reference/Ethernet), just copy these following files into the [`Ethernet library`](https://www.arduino.cc/en/Reference/Ethernet) directory to overwrite the old files:
+- [Ethernet.h](LibraryPatches/Ethernet/src/Ethernet.h)
+- [Ethernet.cpp](LibraryPatches/Ethernet/src/Ethernet.cpp)
+- [EthernetServer.cpp](LibraryPatches/Ethernet/src/EthernetServer.cpp)
+- [w5100.h](LibraryPatches/Ethernet/src/utility/w5100.h)
+- [w5100.cpp](LibraryPatches/Ethernet/src/utility/w5100.cpp)
+
+You can also use the forked and modified library at [Patched Ethernet](https://github.com/khoih-prog/Ethernet)
+
+#### 3. For EthernetLarge library
+
+To fix [`EthernetLarge library`](https://github.com/OPEnSLab-OSU/EthernetLarge), just copy these following files into the [`EthernetLarge library`](https://github.com/OPEnSLab-OSU/EthernetLarge) directory to overwrite the old files:
+- [EthernetLarge.h](LibraryPatches/EthernetLarge/src/EthernetLarge.h)
+- [EthernetLarge.cpp](LibraryPatches/EthernetLarge/src/EthernetLarge.cpp)
+- [EthernetServer.cpp](LibraryPatches/EthernetLarge/src/EthernetServer.cpp)
+- [w5100.h](LibraryPatches/EthernetLarge/src/utility/w5100.h)
+- [w5100.cpp](LibraryPatches/EthernetLarge/src/utility/w5100.cpp)
+
+You can also use the forked and modified library at [Patched EthernetLarge](https://github.com/khoih-prog/EthernetLarge)
+
+#### 4. For Ethernet2 library
+
+To fix [`Ethernet2 library`](https://github.com/khoih-prog/Ethernet2), just copy these following files into the [`Ethernet2 library`](https://github.com/khoih-prog/Ethernet2) directory to overwrite the old files:
+
+- [Ethernet2.h](LibraryPatches/Ethernet2/src/Ethernet2.h)
+- [Ethernet2.cpp](LibraryPatches/Ethernet2/src/Ethernet2.cpp)
+
+To add UDP Multicast support, necessary for the [**UPnP_Generic library**](https://github.com/khoih-prog/UPnP_Generic):
+
+- [EthernetUdp2.h](LibraryPatches/Ethernet2/src/EthernetUdp2.h)
+- [EthernetUdp2.cpp](LibraryPatches/Ethernet2/src/EthernetUdp2.cpp)
+
+You can also use the forked and modified library at [Patched Ethernet2](https://github.com/khoih-prog/Ethernet2)
+
+#### 5. For Ethernet3 library
+
+5. To fix [`Ethernet3 library`](https://github.com/sstaub/Ethernet3), just copy these following files into the [`Ethernet3 library`](https://github.com/sstaub/Ethernet3) directory to overwrite the old files:
+- [Ethernet3.h](LibraryPatches/Ethernet3/src/Ethernet3.h)
+- [Ethernet3.cpp](LibraryPatches/Ethernet3/src/Ethernet3.cpp)
+
+You can also use the forked and modified library at [Patched Ethernet3](https://github.com/khoih-prog/Ethernet3)
+
+#### 6. For UIPEthernet library
+
+***To be able to compile and run on nRF52 boards with ENC28J60 using UIPEthernet library***, you have to copy these following files into the UIPEthernet `utility` directory to overwrite the old files:
+
+- [UIPEthernet.h](LibraryPatches/UIPEthernet/UIPEthernet.h)
+- [UIPEthernet.cpp](LibraryPatches/UIPEthernet/UIPEthernet.cpp)
+- [Enc28J60Network.h](LibraryPatches/UIPEthernet/utility/Enc28J60Network.h)
+- [Enc28J60Network.cpp](LibraryPatches/UIPEthernet/utility/Enc28J60Network.cpp)
+
+#### 7. For fixing ESP32 compile error
+
+To fix [`ESP32 compile error`](https://github.com/espressif/arduino-esp32), just copy the following file into the [`ESP32`](https://github.com/espressif/arduino-esp32) cores/esp32 directory (e.g. ./arduino-1.8.19/hardware/espressif/cores/esp32) to overwrite the old file:
+- [Server.h](LibraryPatches/esp32/cores/esp32/Server.h)
+
+#### 8. For fixing ESP8266 compile error
+
+To fix `ESP8266 compile error` such as
+
+```
+error: 'class EthernetClass' has no member named 'init'
+Ethernet.init (USE_THIS_SS_PIN);
+```
+
+just rename the following file in ./arduino-1.8.19/hardware/esp8266com/esp8266/libraries/Ethernet directory
+
+- From `Ethernet.h` to `Ethernet_ESP8266.h`
 
 
 ---

@@ -13,11 +13,12 @@
   Built by Khoi Hoang https://github.com/khoih-prog/MQTTPubSubClient_Generic
   Licensed under MIT license
   
-  Version: 1.0.0
+  Version: 1.0.1
   
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0    K Hoang     23/03/2022 Initial porting and coding to add support to many boards, using Ethernet or WiFi
+  1.0.0    K Hoang     11/04/2022 Use Ethernet_Generic library as default. Support SPI1/SPI2 for RP2040/ESP32
  *****************************************************************************************************************************/
 
 #pragma once

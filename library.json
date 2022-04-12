@@ -1,7 +1,7 @@
 {
   "name": "MQTTPubSubClient_Generic",
-  "version": "1.0.0",
-  "description": "MQTT and MQTT over WebSoket Client for Arduino. Now supporting nRF52, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, Teensy, SAM DUE, RP2040-based boards, besides ESP8266, ESP32 (ESP32, ESP32_S2, ESP32_S3 and ESP32_C3) and WT32_ETH01. Ethernet shields W5100, W5200, W5500, ENC28J60, Teensy 4.1 NativeEthernet/QNEthernet.",
+  "version": "1.0.1",
+  "description": "MQTT and MQTT over WebSoket Client for Arduino. Now supporting nRF52, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, Teensy, SAM DUE, RP2040-based boards, besides ESP8266, ESP32 (ESP32, ESP32_S2, ESP32_S3 and ESP32_C3) and WT32_ETH01. Ethernet shields W5100, W5200, W5500, ENC28J60, Teensy 4.1 NativeEthernet/QNEthernet. Ethernet_Generic library is used as default for W5x00",
   "keywords": "mqtt, websocket, wifi, ethernet, tcp",
   "authors": 
   [
@@ -40,13 +40,13 @@
     {
       "owner": "khoih-prog",
       "name": "WiFiWebServer",
-      "version": ">=1.6.1",
+      "version": ">=1.7.0",
       "platforms": ["*"]
     },
     {
       "owner": "khoih-prog",
       "name": "EthernetWebServer",
-      "version": ">=2.0.0",
+      "version": ">=2.1.2",
       "platforms": ["*"]
     },
     {
@@ -92,28 +92,9 @@
       "platforms": ["*"]
     },
     {
-      "owner": "adafruit",
-      "name": "Ethernet2",
-      "version": ">=1.0.4",
-      "platforms": ["*"]
-    },
-    {
-      "owner": "sstaub",
-      "name": "Ethernet3",
-      "version": ">=1.5.5",
-      "platforms": ["*"]
-    },
-    {
-      "owner": "arduino-libraries",
-      "name": "Ethernet",
-      "version": ">=2.0.0",
-      "platforms": ["*"]
-    },
-    {
-      "owner": "openslab-osu",
-      "name": "EthernetLarge",
-      "version": ">=2.0.0",
-      "platforms": ["*"]
+      "owner": "khoih-prog",
+      "name": "Ethernet_Generic",
+      "version": "^2.0.1"
     },
     {
       "name": "WiFi101",
@@ -122,7 +103,7 @@
     {
       "owner": "ssilverman",
       "name": "QNEthernet",
-      "version": ">=0.13.0",
+      "version": ">=0.14.0",
       "platforms": ["teensy"]
     }
   ],

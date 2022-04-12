@@ -13,11 +13,12 @@
   Built by Khoi Hoang https://github.com/khoih-prog/MQTTPubSubClient_Generic
   Licensed under MIT license
   
-  Version: 1.0.0
+  Version: 1.0.1
   
   Version Modified By   Date      Comments
   ------- -----------  ---------- -----------
   1.0.0    K Hoang     23/03/2022 Initial porting and coding to add support to many boards, using Ethernet or WiFi
+  1.0.0    K Hoang     11/04/2022 Use Ethernet_Generic library as default. Support SPI1/SPI2 for RP2040/ESP32
  *****************************************************************************************************************************/
 
 #pragma once
@@ -25,13 +26,13 @@
 #ifndef MQTT_PUBSUB_CLIENT_GENERIC_H
 #define MQTT_PUBSUB_CLIENT_GENERIC_H
 
-#define MQTT_PUBSUB_CLIENT_GENERIC_VERSION            "MQTTPubSubClient_Generic v1.0.0"
+#define MQTT_PUBSUB_CLIENT_GENERIC_VERSION            "MQTTPubSubClient_Generic v1.0.1"
 
 #define MQTT_PUBSUB_CLIENT_GENERIC_VERSION_MAJOR      1
 #define MQTT_PUBSUB_CLIENT_GENERIC_VERSION_MINOR      0
-#define MQTT_PUBSUB_CLIENT_GENERIC_VERSION_PATCH      0
+#define MQTT_PUBSUB_CLIENT_GENERIC_VERSION_PATCH      1
 
-#define MQTT_PUBSUB_CLIENT_GENERIC_VERSION_INT        1000000
+#define MQTT_PUBSUB_CLIENT_GENERIC_VERSION_INT        1000001
 
 #include <Arduino.h>
 #include <Client.h>

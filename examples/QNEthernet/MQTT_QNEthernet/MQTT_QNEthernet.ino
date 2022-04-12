@@ -21,20 +21,22 @@ EthernetClient   client;
 MQTTPubSubClient mqttClient;
 
 //#define MQTT_SERVER         "192.168.2.30"
-#define MQTT_SERVER           "public.cloud.shiftr.io"
+//#define MQTT_SERVER           "public.cloud.shiftr.io"
+#define MQTT_SERVER           "test.mosquitto.org"
 #define MQTT_PORT             1883
 
 const char *PubTopic    = "/mqttPubSub";                                  // Topic to publish
-const char *PubMessage  = "Hello from " BOARD_NAME " " SHIELD_TYPE;       // Topic Message to publish
+const char *PubMessage  = "Hello from " BOARD_NAME " with " SHIELD_TYPE;       // Topic Message to publish
 
 
 void setup() 
 {
   // Debug console
   Serial.begin(115200);
-  while (!Serial);
+  while (!Serial && millis() < 5000);
 
-  Serial.print("\nStart MQTT_QNEthernet on "); Serial.println(BOARD_NAME);
+  Serial.print("\nStart MQTT_QNEthernet on "); Serial.print(BOARD_NAME);
+  Serial.print(" with "); Serial.println(SHIELD_TYPE);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
 
 #if USE_NATIVE_ETHERNET
@@ -85,9 +87,10 @@ void setup()
       delay(1);
     }
   }
-  else
+
+  if (!Ethernet.waitForLink(5000))
   {
-    Serial.print(F("Connected! IP address:")); Serial.println(Ethernet.localIP());
+    Serial.println(F("Failed to wait for Link"));
   }
 
 #endif

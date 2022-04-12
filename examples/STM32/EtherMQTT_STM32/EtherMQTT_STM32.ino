@@ -22,21 +22,14 @@ MQTTPubSubClient mqttClient;
 
 //#define MQTT_SERVER         "192.168.2.30"
 #define MQTT_SERVER           "public.cloud.shiftr.io"
+//#define MQTT_SERVER           "test.mosquitto.org"
 #define MQTT_PORT             1883
 
 const char *PubTopic    = "/mqttPubSub";                                  // Topic to publish
-const char *PubMessage  = "Hello from " BOARD_NAME " " SHIELD_TYPE;       // Topic Message to publish
+const char *PubMessage  = "Hello from " BOARD_NAME " with " SHIELD_TYPE;       // Topic Message to publish
 
-void setup() 
+void initEthernet()
 {
-  // Debug console
-  Serial.begin(115200);
-  while (!Serial);
-
-  Serial.print("\nStart EtherMQTT_STM32 on "); Serial.println(BOARD_NAME);
-  Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
-  Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
-
 #if !(USE_BUILTIN_ETHERNET)
   ET_LOGWARN3(F("Board :"), BOARD_NAME, F(", setCsPin:"), USE_THIS_SS_PIN);
 
@@ -50,27 +43,17 @@ void setup()
 
 #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
   // For other boards, to change if necessary
-  #if ( USE_ETHERNET || USE_ETHERNET_LARGE || USE_ETHERNET2  || USE_ETHERNET_ENC )
-    // Must use library patch for Ethernet, Ethernet2, EthernetLarge libraries
-    Ethernet.init (USE_THIS_SS_PIN);
-  
-  #elif USE_ETHERNET3
-    // Use  MAX_SOCK_NUM = 4 for 4K, 2 for 8K, 1 for 16K RX/TX buffer
-    #ifndef ETHERNET3_MAX_SOCK_NUM
-      #define ETHERNET3_MAX_SOCK_NUM      4
-    #endif
-  
-    Ethernet.setCsPin (USE_THIS_SS_PIN);
-    Ethernet.init (ETHERNET3_MAX_SOCK_NUM);
+  #if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+  Ethernet.init (USE_THIS_SS_PIN);
 
   #elif USE_CUSTOM_ETHERNET
-    // You have to add initialization for your Custom Ethernet here
-    // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
-    //Ethernet.init(USE_THIS_SS_PIN);
-    
-  #endif  //( ( USE_ETHERNET || USE_ETHERNET_LARGE || USE_ETHERNET2  || USE_ETHERNET_ENC )
+  // You have to add initialization for your Custom Ethernet here
+  // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
+  //Ethernet.init(USE_THIS_SS_PIN);
+
+  #endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
 #endif
-  
+
   // start the ethernet connection and the server:
   // Use DHCP dynamic IP and random mac
   uint16_t index = millis() % NUMBER_OF_MAC;
@@ -78,10 +61,22 @@ void setup()
   //Ethernet.begin(mac[index], ip);
   Ethernet.begin(mac[index]);
 
-  // you're connected now, so print out the data
-  Serial.print(F("You're connected to the network, IP = "));
-  Serial.println(Ethernet.localIP());
+  Serial.print(F("Connected! IP address: "));
+  Serial.println(Ethernet.localIP());  
+}
 
+void setup() 
+{
+  // Debug console
+  Serial.begin(115200);
+  while (!Serial && millis() < 5000);
+
+  Serial.print("\nStart EtherMQTT_STM32 on "); Serial.print(BOARD_NAME);
+  Serial.print(" with "); Serial.println(SHIELD_TYPE);
+  Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
+  Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
+
+  initEthernet();
 
   Serial.print("Connecting to host "); Serial.println(MQTT_SERVER);
   

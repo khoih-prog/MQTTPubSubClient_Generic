@@ -86,10 +86,10 @@
     * [4. WiFiMQTTSecure](examples/WiFi/WiFiMQTTSecure)
     * [5. WiFiMQTTSecureAWS](examples/WiFi/WiFiMQTTSecureAWS)
   * [5. For RP2040W](#5-For-RP2040W) **New**
-    * [1. WiFiMQTT](examples/WiFi/WiFiMQTT)
-    * [2. WiFiMQTToverWebSocket](examples/WiFi/WiFiMQTToverWebSocket)
-    * [3. WiFiMQTTSecure](examples/WiFi/WiFiMQTTSecure)
-    * [4. WiFiMQTTSecureAWS](examples/WiFi/WiFiMQTTSecureAWS)
+    * [1. WiFiMQTT](examples/RP2040W/WiFiMQTT)
+    * [2. WiFiMQTToverWebSocket](examples/RP2040W/WiFiMQTToverWebSocket)
+    * [3. WiFiMQTTSecure](examples/RP2040W/WiFiMQTTSecure)
+    * [4. WiFiMQTTSecureAWS](examples/RP2040W/WiFiMQTTSecureAWS)
 * [Example EtherMQTToverWebSocket](#example-EtherMQTToverWebSocket)
   * [1. File EtherMQTToverWebSocket.ino](#1-file-EtherMQTToverWebSocketino)
   * [2. File defines.h](#2-file-definesh)
@@ -253,7 +253,7 @@ This [**MQTTPubSubClient_Generic** library](https://github.com/khoih-prog/MQTTPu
    
 18. [`WiFiWebServer library v1.9.5+`](https://github.com/khoih-prog/WiFiWebServer) if necessary to use certain WiFi/WiFiNINA features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiWebServer.svg?)](https://www.ardu-badge.com/WiFiWebServer)
 19. [`Modified WiFi101 Library v0.16.1+`](https://github.com/khoih-prog/WiFi101) to use SAMD MKR1000, etc. boards with WiFi101.
-20. [`WebSockets_Generic library v1.9.5+`](https://github.com/khoih-prog/WebSockets_Generic) if necessary to use `MQTT-over-WebSockets` features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebSockets_Generic.svg?)](https://www.ardu-badge.com/WebSockets_Generic)
+20. [`WebSockets_Generic library v2.16.0+`](https://github.com/khoih-prog/WebSockets_Generic) if necessary to use `MQTT-over-WebSockets` features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebSockets_Generic.svg?)](https://www.ardu-badge.com/WebSockets_Generic)
 
 ---
 ---
@@ -1023,10 +1023,10 @@ Connect FDTI (USB to Serial) as follows:
  
 #### 5. For RP2040W
 
- 1. [WiFiMQTT](examples/WiFi/WiFiMQTT)
- 2. [WiFiMQTToverWebSocket](examples/WiFi/WiFiMQTToverWebSocket)
- 3. [WiFiMQTTSecure](examples/WiFi/WiFiMQTTSecure)
- 4. [WiFiMQTTSecureAWS](examples/WiFi/WiFiMQTTSecureAWS)
+ 1. [WiFiMQTT](examples/RP2040W/WiFiMQTT)
+ 2. [WiFiMQTToverWebSocket](examples/RP2040W/WiFiMQTToverWebSocket)
+ 3. [WiFiMQTTSecure](examples/RP2040W/WiFiMQTTSecure)
+ 4. [WiFiMQTTSecureAWS](examples/RP2040W/WiFiMQTTSecureAWS)
 
 ---
 ---

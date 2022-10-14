@@ -76,7 +76,7 @@
   * [2. For QNEthernet](#2-for-QNEthernet)
     * [1. MQTToverWebSocket_QNEthernet](examples/QNEthernet/MQTToverWebSocket_QNEthernet)
     * [2. MQTT_QNEthernet](examples/QNEthernet/MQTT_QNEthernet)
-  * [3. For STM32](#3-for-STM32)
+  * [3. For STM32](#3-For-STM32)
     * [1. EtherMQTToverWebSocket_STM32](examples/STM32/EtherMQTToverWebSocket_STM32)
     * [2. EtherMQTT_STM32](examples/STM32/EtherMQTT_STM32)
   * [4. For WiFi](#4-For-WiFi)
@@ -90,6 +90,12 @@
     * [2. WiFiMQTToverWebSocket](examples/RP2040W/WiFiMQTToverWebSocket)
     * [3. WiFiMQTTSecure](examples/RP2040W/WiFiMQTTSecure)
     * [4. WiFiMQTTSecureAWS](examples/RP2040W/WiFiMQTTSecureAWS)
+  * [6. For WiFiNINA](#6-For-WiFiNINA)
+    * [1. WiFiNINA_MQTT](examples/WiFiNINA/WiFiNINA_MQTT)
+    * [2. WiFiNINA_MQTToverWebSocket](examples/WiFiNINA/WiFiNINA_MQTToverWebSocket)
+    * [3. WiFiNINA_MQTToverWebSocketSecure](examples/WiFiNINA/WiFiNINA_MQTToverWebSocketSecure)
+    * [4. WiFiNINA_MQTTSecure](examples/WiFiNINA/WiFiNINA_MQTTSecure)
+    * [5. WiFiNINA_MQTTSecureAWS](examples/WiFiNINA/WiFiNINA_MQTTSecureAWS)
 * [Example EtherMQTToverWebSocket](#example-EtherMQTToverWebSocket)
   * [1. File EtherMQTToverWebSocket.ino](#1-file-EtherMQTToverWebSocketino)
   * [2. File defines.h](#2-file-definesh)
@@ -106,6 +112,9 @@
   * [10. WiFiMQTT on RASPBERRY_PI_PICO_W](#10-WiFiMQTT-on-RASPBERRY_PI_PICO_W) **New**
   * [11. WiFiMQTTSecure on RASPBERRY_PI_PICO_W](#11-WiFiMQTTSecure-on-RASPBERRY_PI_PICO_W) **New**
   * [12. WiFiMQTToverWebSocket on RASPBERRY_PI_PICO_W](#12-WiFiMQTToverWebSocket-on-RASPBERRY_PI_PICO_W) **New**
+  * [13. WiFiNINA_MQTToverWebSocket on Nano_RP2040_Connect](#13-WiFiNINA_MQTToverWebSocket-on-Nano_RP2040_Connect) **New**
+  * [14. WiFiNINA_MQTToverWebSocketSecure on Nano_RP2040_Connect](#14-WiFiNINA_MQTToverWebSocketSecure-on-Nano_RP2040_Connect) **New**
+  * [15. WiFiNINA_MQTToverWebSocketSecure on SAMD_NANO_33_IOT](#15-WiFiNINA_MQTToverWebSocketSecure-on-SAMD_NANO_33_IOT) **New**
 * [Debug](#debug)
 * [Troubleshooting](#troubleshooting)
 * [Issues](#issues)
@@ -128,7 +137,7 @@ This [**MQTTPubSubClient_Generic library**](https://github.com/khoih-prog/MQTTPu
 - [**Joël Gähwiler's async-mqtt Library**](https://github.com/256dpi/arduino-mqtt)
 - [**Hideaki Tai's MQTTPubSubClient Library**](https://github.com/hideakitai/MQTTPubSubClient)
 
- to provide support to many more boards besides ESP32/ESP8266, such as **STM32F, Teensy 4.1, etc. boards**. Those supported boards can be used with **ESP8266/ESP32’s WiFi, LAN8742A Ethernet, Teensy 4.1 QNEthernet, W5x00 Ethernet, etc.**
+ to provide support to many more boards besides ESP32/ESP8266, such as **SAMD, SAM DUE, nRF52, RP2040, STM32, Teensy 4.1, etc. boards**. Those supported boards can be used with **ESP8266/ESP32’s WiFi, WiFiNINA, CYW43439 WiFi, LAN8742A Ethernet, Teensy 4.1 QNEthernet, W5x00 Ethernet, etc.**
 
 
 ---
@@ -159,7 +168,7 @@ This [**MQTTPubSubClient_Generic** library](https://github.com/khoih-prog/MQTTPu
 
  6. **ESP8266**
  
- 7. RP2040-based boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** v2.1.0+ core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico** core v1.5.1+](https://github.com/earlephilhower/arduino-pico).
+ 7. `RP2040-based` boards, such as **RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed) or [**Earle Philhower's arduino-pico** core](https://github.com/earlephilhower/arduino-pico).
 
  8. **WT32_ETH01 boards** using ESP32-based boards and LAN8720 Ethernet
  
@@ -192,7 +201,7 @@ This [**MQTTPubSubClient_Generic** library](https://github.com/khoih-prog/MQTTPu
   - **Discovery (DISCO_F746NG)**
   - **STM32F4 boards (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE_Mini, DIYMORE_F407VGT, FK407M1)**
 
-12. **RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040**, using `Ethernet`
+12. **RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO, ADAFRUIT_FEATHER_RP2040**, using `Ethernet` or `WiFiNINA`
 
 13. **RP2040W boards, such as RASPBERRY_PI_PICO_W**, using `Cyw43439 WiFi` or `Ethernet`
 
@@ -703,7 +712,7 @@ Look in file [**adc_common.c**](https://github.com/espressif/esp-idf/blob/master
 ```C++
 #include <WiFi.h>
 // or
-// #include <Ethernet.h>
+// #include <Ethernet_Generic.h>
 #include <MQTTPubSubClient_Generic.h>
 
 WiFiClient client;
@@ -796,7 +805,7 @@ void loop()
 
 #### MQTT with Secure Connection
 
-If your board supports secure connection with certificates, it is also supprted same as above. Please see [WiFiMQTTSecureAWS](https://github.com/hideakitai/MQTTPubSubClient/examples/WiFiMQTTSecureAWS) example for the detail.
+If your board supports secure connection with certificates, it is also supprted same as above. Please see [WiFiMQTTSecureAWS](examples/WiFi/WiFiMQTTSecureAWS) example for the detail.
 
 ```C++
 #include <WiFi.h>
@@ -1028,6 +1037,14 @@ Connect FDTI (USB to Serial) as follows:
  3. [WiFiMQTTSecure](examples/RP2040W/WiFiMQTTSecure)
  4. [WiFiMQTTSecureAWS](examples/RP2040W/WiFiMQTTSecureAWS)
 
+#### 6. For WiFiNINA
+
+ 1. [WiFiNINA_MQTT](examples/WiFiNINA/WiFiNINA_MQTT)
+ 2. [WiFiNINA_MQTToverWebSocket](examples/WiFiNINA/WiFiNINA_MQTToverWebSocket)
+ 3. [WiFiNINA_MQTToverWebSocketSecure](examples/WiFiNINA/WiFiNINA_MQTToverWebSocketSecure)
+ 4. [WiFiNINA_MQTTSecure](examples/WiFiNINA/WiFiNINA_MQTTSecure)
+ 5. [WiFiNINA_MQTTSecureAWS](examples/WiFiNINA/WiFiNINA_MQTTSecureAWS)
+ 
 ---
 ---
 
@@ -1055,7 +1072,7 @@ This is terminal debug output when running [WiFiMQTToverWebSocket](examples/WiFi
 
 ```
 Start WiFiMQTToverWebSocket on ESP8266_NODEMCU_ESP12E with ESP WiFi using WiFi Library
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.145
 SSID: HueNet1, Signal strength (RSSI):-39 dBm
@@ -1073,7 +1090,7 @@ This is terminal debug output when running [WiFiMQTToverWebSocketSecure](example
 
 ```
 Start WiFiMQTToverWebSocketSecure on ESP32_DEV
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.93
 SSID: HueNet1, Signal strength (RSSI):-35 dBm
@@ -1092,7 +1109,7 @@ This is terminal debug output when running [WiFiMQTToverWebSocket](examples/WiFi
 ```
 Start WiFiMQTToverWebSocket on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
 WiFiWebServer v1.7.0
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.150
 SSID: HueNet1, Signal strength (RSSI):-15 dBm
@@ -1112,7 +1129,7 @@ This is terminal debug output when running [EtherMQTToverWebSocket](examples/Eth
 ```
 Start EtherMQTToverWebSocket_STM32 on NUCLEO_F767ZI with W5x00 using default Ethernet_Generic Library
 EthernetWebServer_STM32 v1.4.0
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 [EWS] Board : NUCLEO_F767ZI , setCsPin: 10
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1139,7 +1156,7 @@ This is terminal debug output when running [EtherMQTToverWebSocket_STM32](exampl
 ```
 Start EtherMQTToverWebSocket_STM32 on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
 EthernetWebServer_STM32 v1.4.0
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 Connected! IP address: 192.168.2.88
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
@@ -1156,7 +1173,7 @@ This is terminal debug output when running [MQTToverWebSocket_QNEthernet](exampl
 
 ```
 Start MQTToverWebSocket_QNEthernet on TEENSY 4.1
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 =========== USE_QN_ETHERNET ===========
 Initialize Ethernet using static IP => Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
@@ -1174,7 +1191,7 @@ This is terminal debug output when running [EtherMQTToverWebSocket](examples/Eth
 ```
 Start EtherMQTToverWebSocket on MBED RASPBERRY_PI_PICO
 EthernetWebServer v2.1.2
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1213,7 +1230,7 @@ This is terminal debug output when running [EtherMQTToverWebSocket](examples/Eth
 ```
 Start EtherMQTToverWebSocket on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI1
 EthernetWebServer v2.1.2
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 15
@@ -1249,7 +1266,7 @@ This is terminal debug output when running [EtherMQTToverWebSocket](examples/Eth
 ```
 Start EtherMQTToverWebSocket on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
 EthernetWebServer v2.1.2
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1281,7 +1298,7 @@ This is terminal debug output when running [WiFiMQTT](examples/RP2040W/WiFiMQTT)
 
 ```
 Start WiFiMQTT on RASPBERRY_PI_PICO_W
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.77
 SSID: HueNet1, Signal strength (RSSI):0 dBm
@@ -1307,7 +1324,7 @@ This is terminal debug output when running [WiFiMQTTSecure](examples/RP2040W/WiF
 
 ```
 Start WiFiMQTTSecure on RASPBERRY_PI_PICO_W
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.77
 SSID: HueNet1, Signal strength (RSSI):0 dBm
@@ -1328,7 +1345,7 @@ This is terminal debug output when running [WiFiMQTToverWebSocket](examples/RP20
 
 ```
 Start WiFiMQTToverWebSocket on RASPBERRY_PI_PICO_W
-MQTTPubSubClient_Generic v1.1.0
+MQTTPubSubClient_Generic v1.2.0
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.77
 SSID: HueNet1, Signal strength (RSSI):0 dBm
@@ -1337,6 +1354,72 @@ Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO_W
 Subcribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
 ```
+
+
+---
+
+#### 13. WiFiNINA_MQTToverWebSocket on Nano_RP2040_Connect
+
+This is terminal debug output when running [WiFiNINA_MQTToverWebSocket](examples/WiFiNINA/WiFiNINA_MQTToverWebSocket) on **NANO_RP2040_CONNECT**, with WiFiNINA using `WiFiNINA_Generic` Library and `arduino-pico` core, connecting to `test.mosquitto.org` MQTT server.
+
+```
+Start WiFiNINA_MQTToverWebSocket on NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
+WiFiNINA_Generic v1.8.14-6
+WiFiWebServer v1.9.5
+WebSockets_Generic v2.16.0
+MQTTPubSubClient_Generic v1.2.0
+Please upgrade the firmware
+Connecting to SSID: HueNet1
+You're connected to the network, IP = 192.168.2.105
+SSID: HueNet1, Signal strength (RSSI):-27 dBm
+Connecting to WebSockets Server @ test.mosquitto.org, port 8080
+Connecting to mqtt broker.... connected!
+MQTT received: /mqttPubSub - Hello from NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
+Subcribed to /mqttPubSub => Hello from NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
+```
+
+---
+
+#### 14. WiFiNINA_MQTToverWebSocketSecure on Nano_RP2040_Connect
+
+This is terminal debug output when running [WiFiNINA_MQTToverWebSocketSecure](examples/WiFiNINA/WiFiNINA_MQTToverWebSocketSecure) on **NANO_RP2040_CONNECT**, with WiFiNINA using `WiFiNINA_Generic` Library and `Arduino mbed_nano` core, connecting to `public.cloud.shiftr.io` Secured MQTT server.
+
+
+```
+Start WiFiNINA_MQTToverWebSocketSecure on Nano RP2040 Connect
+WiFiNINA_Generic v1.8.14-6
+WebSockets_Generic v2.16.0
+MQTTPubSubClient_Generic v1.2.0
+Connecting to SSID: HueNet1
+You're connected to the network, IP = 192.168.2.105
+SSID: HueNet1, Signal strength (RSSI):-30 dBm
+Connecting to secured-host:port = public.cloud.shiftr.io:443
+Connecting to mqtt broker.... connected!
+MQTT received: /mqttPubSub - Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
+Subcribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
+```
+
+
+---
+
+#### 15. WiFiNINA_MQTToverWebSocketSecure on SAMD_NANO_33_IOT
+
+This is terminal debug output when running [WiFiNINA_MQTToverWebSocketSecure](examples/WiFiNINA/WiFiNINA_MQTToverWebSocketSecure) on **SAMD_NANO_33_IOT**, with WiFiNINA using `WiFiNINA_Generic` Library, connecting to `public.cloud.shiftr.io` Secured MQTT server.
+
+```
+Start WiFiNINA_MQTToverWebSocketSecure on Nano RP2040 Connect
+WiFiNINA_Generic v1.8.14-6
+WebSockets_Generic v2.16.0
+MQTTPubSubClient_Generic v1.2.0
+Connecting to SSID: HueNet1
+You're connected to the network, IP = 192.168.2.105
+SSID: HueNet1, Signal strength (RSSI):-30 dBm
+Connecting to secured-host:port = public.cloud.shiftr.io:443
+Connecting to mqtt broker.... connected!
+MQTT received: /mqttPubSub - Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
+Subcribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
+```
+
 
 ---
 ---
@@ -1391,7 +1474,7 @@ Submit issues to: [MQTTPubSubClient_Generic issues](https://github.com/khoih-pro
  8. Add support to Seeeduino SAMD21/SAMD51: LoRaWAN, Zero, Femto M0, XIAO M0, Wio GPS Board, Wio Terminal, Grove UI Wireless
  9. Add support to [`EthernetENC`](https://github.com/jandrassy/EthernetENC)
 10. Add support to RP2040-based boards such as RASPBERRY_PI_PICO, using [**Arduino-mbed RP2040** core](https://github.com/arduino/ArduinoCore-mbed)
-11. Add support to RP2040-based boards such as RASPBERRY_PI_PICO, using [**Earle Philhower's arduino-pico** core v1.3.1+](https://github.com/earlephilhower/arduino-pico)
+11. Add support to RP2040-based boards such as RASPBERRY_PI_PICO, using [**Earle Philhower's arduino-pico** core](https://github.com/earlephilhower/arduino-pico)
 12. Add support to Teensy 4.1 built-in Ethernet using [`NativeEthernet`](https://github.com/vjmuzik/NativeEthernet) library
 13. Add support to Teensy 4.1 built-in Ethernet using [`QNEthernet`](https://github.com/ssilverman/QNEthernet) library
 14. Add support to SAMD21/SAMD51 boards using [Fab_SAM_Arduino core](https://github.com/qbolsee/ArduinoCore-fab-sam)
@@ -1400,7 +1483,7 @@ Submit issues to: [MQTTPubSubClient_Generic issues](https://github.com/khoih-pro
 17. Add support to **SPI1 for RP2040** using [arduino-pico core](https://github.com/earlephilhower/arduino-pico)
 18. Use new `waitForLink()` function of QNEthernet
 19. Add support to `RP2040W` using `MQTT`, `Secured MQTT` or `MQTT-over-WebSockets` with [arduino-pico core](https://github.com/earlephilhower/arduino-pico)
-
+20. Add support to `Nano_RP2040_Connect`, `Nano_33_IoT`, using `MQTT`, `Secured MQTT`, `MQTT-over-WebSockets` or `Secured MQTT-over-WebSockets` with [`WiFiNINA_Generic` library](https://github.com/khoih-prog/WiFiNINA_Generic) library
 
 ---
 ---

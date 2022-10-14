@@ -12,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.2.0](#releases-v120)
   * [Releases v1.1.0](#releases-v110)
   * [Releases v1.0.1](#releases-v101)
   * [Initial Releases v1.0.0](#Initial-Releases-v100)
@@ -21,10 +22,16 @@
 
 ## Changelog
 
+### Releases v1.2.0
+
+1. Add support to `Nano_RP2040_Connect`, `Nano_33_IoT`, using `MQTT`, `Secured MQTT`, `MQTT-over-WebSockets` or `Secured MQTT-over-WebSockets` with [`WiFiNINA_Generic` library](https://github.com/khoih-prog/WiFiNINA_Generic) library
+2. Add [WiFiNINA examples](https://github.com/khoih-prog/MQTTPubSubClient_Generic/tree/main/examples/WiFiNINA)
+
 ### Releases v1.1.0
 
 1. Add support to `RP2040W` using `MQTT`, `Secured MQTT` or `MQTT-over-WebSockets` with [arduino-pico core](https://github.com/earlephilhower/arduino-pico)
-2. Update `Packages' Patches`
+2. Add [RP2040W examples](https://github.com/khoih-prog/MQTTPubSubClient_Generic/tree/main/examples/RP2040W)
+3. Update `Packages' Patches`
 
 ### Releases v1.0.1
 

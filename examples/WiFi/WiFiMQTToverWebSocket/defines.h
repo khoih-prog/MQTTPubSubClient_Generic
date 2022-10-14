@@ -21,7 +21,7 @@
 // Debug Level from 0 to 4
 #define _WIFI_LOGLEVEL_             1
 #define _WIFININA_LOGLEVEL_         3
-#define _MQTT_PUBSUB_LOGLEVEL_      1
+#define _MQTT_PUBSUB_LOGLEVEL_      4
 
 #if ( defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) )
 
@@ -381,7 +381,7 @@
 
 #include <WiFiWebServer.h>
 
-char ssid[] = "YOUR_SSID";        // your network SSID (name)
-char pass[] = "12345678";         // your network password
+char ssid[] = "your_ssid";        // your network SSID (name)
+char pass[] = "12345678";         // your network password (use for WPA, or use as key for WEP), length must be 8+
 
 #endif    //defines_h

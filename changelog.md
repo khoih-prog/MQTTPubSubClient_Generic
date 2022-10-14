@@ -2,6 +2,7 @@
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/MQTTPubSubClient_Generic.svg?)](https://www.ardu-badge.com/MQTTPubSubClient_Generic)
 [![GitHub release](https://img.shields.io/github/release/khoih-prog/MQTTPubSubClient_Generic.svg)](https://github.com/khoih-prog/MQTTPubSubClient_Generic/releases)
+[![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/khoih-prog/MQTTPubSubClient_Generic/blob/main/LICENSE)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#Contributing)
 [![GitHub issues](https://img.shields.io/github/issues/khoih-prog/MQTTPubSubClient_Generic.svg)](http://github.com/khoih-prog/MQTTPubSubClient_Generic/issues)
 
@@ -11,6 +12,7 @@
 ## Table of Contents
 
 * [Changelog](#changelog)
+  * [Releases v1.1.0](#releases-v110)
   * [Releases v1.0.1](#releases-v101)
   * [Initial Releases v1.0.0](#Initial-Releases-v100)
 
@@ -18,6 +20,11 @@
 ---
 
 ## Changelog
+
+### Releases v1.1.0
+
+1. Add support to `RP2040W` using `MQTT`, `Secured MQTT` or `MQTT-over-WebSockets` with [arduino-pico core](https://github.com/earlephilhower/arduino-pico)
+2. Update `Packages' Patches`
 
 ### Releases v1.0.1
 

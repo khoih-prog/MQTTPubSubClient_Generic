@@ -1,5 +1,5 @@
 /****************************************************************************************************************************
-  WiFiMQTT.ino
+  WiFiMQTTSecure.ino
 
   MQTT and MQTT over WebSoket Client for Arduino
 
@@ -13,22 +13,34 @@
   Built by Khoi Hoang https://github.com/khoih-prog/MQTTPubSubClient_Generic
   Licensed under MIT license
  *****************************************************************************************************************************/
+ 
+#if !( defined(ARDUINO_RASPBERRY_PI_PICO_W) )
+  #error This code is intended to run only on the RP2040W boards ! Please check your Tools->Board setting.
+#endif
 
-#include "defines.h"
+// Debug Level from 0 to 4
+#define _MQTT_PUBSUB_LOGLEVEL_      1
 
-int status = WL_IDLE_STATUS;     // the Wifi radio's status
+///////please enter your sensitive data in the Secret tab/arduino_secrets.h
+
+char ssid[] = "your_ssid";        // your network SSID (name)
+char pass[] = "12345678";         // your network password (use for WPA, or use as key for WEP), length must be 8+
+
+#include <WiFi.h>
 
 #include <MQTTPubSubClient_Generic.h>
 
-WiFiClient client;
+int status = WL_IDLE_STATUS;     // the Wifi radio's status
+
+WiFiClientSecure client;
 MQTTPubSubClient mqttClient;
 
 //#define MQTT_SERVER         "192.168.2.30"
 #define MQTT_SERVER           "public.cloud.shiftr.io"
-#define MQTT_PORT             1883
+#define MQTT_PORT             8883
 
-const char *PubTopic    = "/mqttPubSub";                                  // Topic to publish
-const char *PubMessage  = "Hello from " BOARD_NAME " with " SHIELD_TYPE;       // Topic Message to publish
+const char *PubTopic    = "/mqttPubSub";                                      // Topic to publish
+const char *PubMessage  = "Hello from WiFiMQTTSecure on " BOARD_NAME;         // Topic Message to publish
 
 void printWifiStatus()
 {
@@ -47,56 +59,27 @@ void printWifiStatus()
   Serial.println(F(" dBm"));
 }
 
-void setup()
+void setup() 
 {
-  // Debug console
   Serial.begin(115200);
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStart WiFiMQTT on ")); Serial.print(BOARD_NAME);
-  Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
-  Serial.println(WIFI_WEBSERVER_VERSION);
+  Serial.print(F("\nStart WiFiMQTTSecure on ")); Serial.println(BOARD_NAME);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
 
-#if WIFI_USING_ESP_AT
+  ///////////////////////////////////
 
-  // initialize serial for ESP module
-  EspSerial.begin(115200);
-  // initialize ESP module
-  WiFi.init(&EspSerial);
-
-  Serial.println(F("WiFi shield init done"));
-  
-#endif
-
-#if !(ESP32 || ESP8266)
-  
-  // check for the presence of the shield
-  #if USE_WIFI_NINA
-    if (WiFi.status() == WL_NO_MODULE)
-  #else
-    if (WiFi.status() == WL_NO_SHIELD)
-  #endif
-    {
-      Serial.println(F("WiFi shield not present"));
-      // don't continue
-      while (true);
-    }
-
-  #if USE_WIFI_NINA
-    String fv = WiFi.firmwareVersion();
-    
-    if (fv < WIFI_FIRMWARE_LATEST_VERSION)
-    {
-      Serial.println(F("Please upgrade the firmware"));
-    }
-  #endif
-  
-#endif
+  // check for the WiFi module:
+  if (WiFi.status() == WL_NO_MODULE)
+  {
+    Serial.println("Communication with WiFi module failed!");
+    // don't continue
+    while (true);
+  }
 
   Serial.print(F("Connecting to SSID: "));
   Serial.println(ssid);
-  
+ 
   status = WiFi.begin(ssid, pass);
 
   delay(1000);
@@ -110,12 +93,16 @@ void setup()
     status = WiFi.status();
   }
 
-  // you're connected now, so print out the data
   printWifiStatus();
 
-  Serial.print("Connecting to host "); Serial.println(MQTT_SERVER);
+  ///////////////////////////////////
+
+  Serial.print("Connecting to secured-host:port = "); Serial.print(MQTT_SERVER); 
+  Serial.print(":"); Serial.println(MQTT_PORT); 
   
-  while (!client.connect(MQTT_SERVER, MQTT_PORT)) 
+  client.setInsecure();  // skip verification
+  
+  while (!client.connect(MQTT_SERVER, MQTT_PORT))
   {
     Serial.print(".");
     delay(1000);

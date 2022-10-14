@@ -120,8 +120,8 @@ void setup()
   printWifiStatus();
 
   // server address, port and URL
-  Serial.print("Connecting to WebSockets Server @ ");
-  Serial.println(WS_SERVER);
+  Serial.print("Connecting to WebSockets Server @ "); Serial.print(WS_SERVER);
+  Serial.print(", port "); Serial.println(WS_PORT);
 
   client.begin(WS_SERVER, WS_PORT, "/", "mqtt");  // "mqtt" is required
 

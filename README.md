@@ -253,7 +253,7 @@ This [**MQTTPubSubClient_Generic** library](https://github.com/khoih-prog/MQTTPu
    
 18. [`WiFiWebServer library v1.9.5+`](https://github.com/khoih-prog/WiFiWebServer) if necessary to use certain WiFi/WiFiNINA features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiWebServer.svg?)](https://www.ardu-badge.com/WiFiWebServer)
 19. [`Modified WiFi101 Library v0.16.1+`](https://github.com/khoih-prog/WiFi101) to use SAMD MKR1000, etc. boards with WiFi101.
-
+20. [`WebSockets_Generic library v1.9.5+`](https://github.com/khoih-prog/WebSockets_Generic) if necessary to use `MQTT-over-WebSockets` features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebSockets_Generic.svg?)](https://www.ardu-badge.com/WebSockets_Generic)
 
 ---
 ---

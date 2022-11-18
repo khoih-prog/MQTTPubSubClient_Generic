@@ -451,7 +451,7 @@ Supposing the STM32 stm32 core version is 2.3.0. These files must be copied into
 - `~/.arduino15/packages/STM32/hardware/stm32/2.3.0/system/STM32F7xx/stm32f7xx_hal_conf_default.h` for Nucleo-144 STM32F7.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
-theses files must be copied into the corresponding directory:
+these files must be copied into the corresponding directory:
 
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F4xx/stm32f4xx_hal_conf_default.h`
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F7xx/stm32f7xx_hal_conf_default.h
@@ -467,7 +467,7 @@ Supposing the STM32 stm32 core version is 2.3.0. These files must be copied into
 - `~/.arduino15/packages/STM32/hardware/stm32/2.3.0/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h` for Nucleo-64 NUCLEO_L053R8.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
-theses files must be copied into the corresponding directory:
+these files must be copied into the corresponding directory:
 
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/variants/STM32F7xx/F765Z(G-I)T_F767Z(G-I)T_F777ZIT/NUCLEO_F767ZI/variant.h`
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/variants/STM32L0xx/L052R(6-8)T_L053R(6-8)T_L063R8T/NUCLEO_L053R8/variant.h`
@@ -805,7 +805,7 @@ void loop()
 
 #### MQTT with Secure Connection
 
-If your board supports secure connection with certificates, it is also supprted same as above. Please see [WiFiMQTTSecureAWS](examples/WiFi/WiFiMQTTSecureAWS) example for the detail.
+If your board supports secure connection with certificates, it is also supported same as above. Please see [WiFiMQTTSecureAWS](examples/WiFi/WiFiMQTTSecureAWS) example for the detail.
 
 ```C++
 #include <WiFi.h>
@@ -1079,7 +1079,7 @@ SSID: HueNet1, Signal strength (RSSI):-39 dBm
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from ESP8266_NODEMCU_ESP12E
-Subcribed to /mqttPubSub => Hello from ESP8266_NODEMCU_ESP12E
+Subscribed to /mqttPubSub => Hello from ESP8266_NODEMCU_ESP12E
 ```
 
 ---
@@ -1097,7 +1097,7 @@ SSID: HueNet1, Signal strength (RSSI):-35 dBm
 Connecting to secured-host:port = public.cloud.shiftr.io:443
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from WiFiMQTToverWebSocketSecure on ESP32_DEV
-Subcribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on ESP32_DEV
+Subscribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on ESP32_DEV
 ```
 
 ---
@@ -1116,7 +1116,7 @@ SSID: HueNet1, Signal strength (RSSI):-15 dBm
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
-Subcribed to /mqttPubSub => Hello from SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
+Subscribed to /mqttPubSub => Hello from SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
 ```
 
 ---
@@ -1141,9 +1141,9 @@ Connected! IP address: 192.168.2.135
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from NUCLEO_F767ZI with W5x00 using default Ethernet_Generic Library
-Subcribed to /mqttPubSub => Hello from NUCLEO_F767ZI with W5x00 using default Ethernet_Generic Library
+Subscribed to /mqttPubSub => Hello from NUCLEO_F767ZI with W5x00 using default Ethernet_Generic Library
 MQTT received: /mqttPubSub - Hello from NUCLEO_F767ZI with W5x00 using default Ethernet_Generic Library
-Subcribed to /mqttPubSub => Hello from NUCLEO_F767ZI with W5x00 using default Ethernet_Generic Library
+Subscribed to /mqttPubSub => Hello from NUCLEO_F767ZI with W5x00 using default Ethernet_Generic Library
 ```
 
 ---
@@ -1161,7 +1161,7 @@ Connected! IP address: 192.168.2.88
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-Subcribed to /mqttPubSub => Hello from NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
+Subscribed to /mqttPubSub => Hello from NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
 ```
 
 ---
@@ -1178,7 +1178,7 @@ MQTTPubSubClient_Generic v1.2.0
 Initialize Ethernet using static IP => Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from TEENSY 4.1 using QNEthernet
-Subcribed to /mqttPubSub => Hello from TEENSY 4.1 using QNEthernet
+Subscribed to /mqttPubSub => Hello from TEENSY 4.1 using QNEthernet
 ```
 
 ---
@@ -1215,7 +1215,7 @@ Connected! IP address: 192.168.2.103
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker...Done connected!
 MQTT received: /mqttPubSub - Hello from MBED RASPBERRY_PI_PICO
-Subcribed to /mqttPubSub => Hello from MBED RASPBERRY_PI_PICO
+Subscribed to /mqttPubSub => Hello from MBED RASPBERRY_PI_PICO
 ```
 
 ---
@@ -1251,7 +1251,7 @@ Connected! IP address: 192.168.2.115
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI1
-Subcribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI1
+Subscribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI1
 ```
 
 ---
@@ -1287,7 +1287,7 @@ Connected! IP address: 192.168.2.118
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-Subcribed to /mqttPubSub => Hello from TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
+Subscribed to /mqttPubSub => Hello from TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
 ```
 
 ---
@@ -1306,13 +1306,13 @@ Connecting to WebSockets Server @ public.cloud.shiftr.io, port 1883
 Connected!
 Connecting to mqtt broker... connected!
 MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO_W
-Subcribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
+Subscribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
 MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO_W
-Subcribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
+Subscribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
 MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO_W
-Subcribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
+Subscribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
 MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO_W
-Subcribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
+Subscribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
 MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO_W
 ```
 
@@ -1333,7 +1333,7 @@ Connecting to secured-host:port = public.cloud.shiftr.io:8883
 Connected!
 Connecting to mqtt broker... connected!
 MQTT received: /mqttPubSub - Hello from WiFiMQTTSecure on RASPBERRY_PI_PICO_W
-Subcribed to /mqttPubSub => Hello from WiFiMQTTSecure on RASPBERRY_PI_PICO_W
+Subscribed to /mqttPubSub => Hello from WiFiMQTTSecure on RASPBERRY_PI_PICO_W
 ```
 
 
@@ -1352,7 +1352,7 @@ SSID: HueNet1, Signal strength (RSSI):0 dBm
 Connecting to WebSockets Server @ test.mosquitto.org, port 8080
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO_W
-Subcribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
+Subscribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
 ```
 
 
@@ -1375,7 +1375,7 @@ SSID: HueNet1, Signal strength (RSSI):-27 dBm
 Connecting to WebSockets Server @ test.mosquitto.org, port 8080
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-Subcribed to /mqttPubSub => Hello from NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
+Subscribed to /mqttPubSub => Hello from NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
 ```
 
 ---
@@ -1396,7 +1396,7 @@ SSID: HueNet1, Signal strength (RSSI):-30 dBm
 Connecting to secured-host:port = public.cloud.shiftr.io:443
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
-Subcribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
+Subscribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
 ```
 
 
@@ -1417,7 +1417,7 @@ SSID: HueNet1, Signal strength (RSSI):-30 dBm
 Connecting to secured-host:port = public.cloud.shiftr.io:443
 Connecting to mqtt broker.... connected!
 MQTT received: /mqttPubSub - Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
-Subcribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
+Subscribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on Nano RP2040 Connect
 ```
 
 

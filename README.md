@@ -260,7 +260,7 @@ This [**MQTTPubSubClient_Generic** library](https://github.com/khoih-prog/MQTTPu
 15. [`EthernetWebServer_STM32 library v1.5.0+`](https://github.com/khoih-prog/EthernetWebServer_STM32) if necessary to use Ethernet modules/shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer_STM32.svg?)](https://www.ardu-badge.com/EthernetWebServer_STM32)
 16. [`WebServer_WT32_ETH01 library v1.5.1+`](https://github.com/khoih-prog/WebServer_WT32_ETH01) if necessary to use WT32_ETH01 boards. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01)
 17. Depending on which Ethernet card you're using:
-   - [`Ethernet_Generic library v2.6.1+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
+   - [`Ethernet_Generic library v2.7.1+`](https://github.com/khoih-prog/Ethernet_Generic) for W5100, W5200 and W5500/WIZ550io/WIZ850io/USR-ES1 with Wiznet W5500 chip.  [![GitHub release](https://img.shields.io/github/release/khoih-prog/Ethernet_Generic.svg)](https://github.com/khoih-prog/Ethernet_Generic/releases/latest)
    - [`EthernetENC library v2.0.3+`](https://github.com/jandrassy/EthernetENC) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/jandrassy/EthernetENC.svg)](https://github.com/jandrassy/EthernetENC/releases/latest). **New and Better**
    - [`UIPEthernet library v2.0.12+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
    - [`STM32Ethernet library v1.3.0+`](https://github.com/stm32duino/STM32Ethernet) for built-in LAN8742A Ethernet on (Nucleo-144, Discovery). [![GitHub release](https://img.shields.io/github/release/stm32duino/STM32Ethernet.svg)](https://github.com/stm32duino/STM32Ethernet/releases/latest). To be used with [`LwIP library v2.1.2+`](https://github.com/stm32duino/LwIP). [![GitHub release](https://img.shields.io/github/release/stm32duino/LwIP.svg)](https://github.com/stm32duino/LwIP/releases/latest).
@@ -1088,13 +1088,13 @@ Connect FDTI (USB to Serial) as follows:
 
 #### 1. File [EtherMQTToverWebSocket.ino](examples/Ethernet/EtherMQTToverWebSocket/EtherMQTToverWebSocket.ino)
 
-https://github.com/khoih-prog/MQTTPubSubClient_Generic/blob/168f2ce72da6950d577d923e75529453c3f1ee4e/examples/Ethernet/EtherMQTToverWebSocket/EtherMQTToverWebSocket.ino#L17-L320
+https://github.com/khoih-prog/MQTTPubSubClient_Generic/blob/da7f8b5c32a139b67e450d815dab9f8675459f81/examples/Ethernet/EtherMQTToverWebSocket/EtherMQTToverWebSocket.ino#L17-L326
 
 
 #### 2. File [defines.h](examples/Ethernet/EtherMQTToverWebSocket/defines.h)
 
 
-https://github.com/khoih-prog/MQTTPubSubClient_Generic/blob/168f2ce72da6950d577d923e75529453c3f1ee4e/examples/Ethernet/EtherMQTToverWebSocket/defines.h#L16-L491
+https://github.com/khoih-prog/MQTTPubSubClient_Generic/blob/da7f8b5c32a139b67e450d815dab9f8675459f81/examples/Ethernet/EtherMQTToverWebSocket/defines.h#L16-L491
 
 
 ---

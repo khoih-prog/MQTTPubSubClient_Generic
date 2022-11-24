@@ -86,9 +86,11 @@ void printWifiStatus()
 void setup()
 {
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStart WiFiMQTTSecureAWS on ")); Serial.println(BOARD_NAME);
+  Serial.print(F("\nStart WiFiMQTTSecureAWS on "));
+  Serial.println(BOARD_NAME);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
 
   ///////////////////////////////////
@@ -97,22 +99,23 @@ void setup()
   if (WiFi.status() == WL_NO_MODULE)
   {
     Serial.println("Communication with WiFi module failed!");
+
     // don't continue
     while (true);
   }
 
   Serial.print(F("Connecting to SSID: "));
   Serial.println(ssid);
- 
+
   status = WiFi.begin(ssid, pass);
 
   delay(1000);
-   
+
   // attempt to connect to WiFi network
   while ( status != WL_CONNECTED)
   {
     delay(500);
-        
+
     // Connect to WPA/WPA2 network
     status = WiFi.status();
   }
@@ -122,40 +125,42 @@ void setup()
   ///////////////////////////////////
 
   Serial.print("connecting to host...");
-  Serial.print("Connecting to secured-host:port = "); Serial.print(AWS_IOT_ENDPOINT); 
-  Serial.print(":"); Serial.println(AWS_IOT_PORT); 
-  
+  Serial.print("Connecting to secured-host:port = ");
+  Serial.print(AWS_IOT_ENDPOINT);
+  Serial.print(":");
+  Serial.println(AWS_IOT_PORT);
+
   // connect to aws endpoint with certificates and keys
   client.setCACert(AWS_CERT_CA);
   client.setCertificate(AWS_CERT_CRT);
   client.setPrivateKey(AWS_CERT_PRIVATE);
-  
-  while (!client.connect(AWS_IOT_ENDPOINT, AWS_IOT_PORT)) 
+
+  while (!client.connect(AWS_IOT_ENDPOINT, AWS_IOT_PORT))
   {
     Serial.print(".");
     delay(1000);
   }
-  
+
   Serial.println("\nConnected!");
 
   // initialize mqtt client
   mqttClient.begin(client);
 
   Serial.print("connecting to AWS MQTT broker...");
-  
-  while (!mqttClient.connect(DEVICE_NAME)) 
+
+  while (!mqttClient.connect(DEVICE_NAME))
   {
     Serial.print(".");
     delay(1000);
   }
-  
+
   Serial.println(" connected!");
 
   // subscribe callback which is called when every packet has come
   mqttClient.subscribe([](const String & topic, const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.println("MQTT received: " + topic + " - " + payload);
   });
 
@@ -163,20 +168,21 @@ void setup()
   mqttClient.subscribe(PubTopic, [](const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.print("Subcribed to ");
-    Serial.print(PubTopic); Serial.print(" => ");
+    Serial.print(PubTopic);
+    Serial.print(" => ");
     Serial.println(payload);
   });
 }
 
-void loop() 
+void loop()
 {
   mqttClient.update();
 
   static uint32_t prev_ms = millis();
-  
-  if (millis() > prev_ms + 30000) 
+
+  if (millis() > prev_ms + 30000)
   {
     prev_ms = millis();
 

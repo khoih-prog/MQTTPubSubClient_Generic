@@ -1,19 +1,19 @@
 /****************************************************************************************************************************
   WiFiNINA_MQTToverWebSocket.ino
-  
+
   MQTT and MQTT over WebSoket Client for Arduino
-  
-  For nRF52, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, Teensy, SAM DUE, RP2040-based boards, besides ESP8266, 
+
+  For nRF52, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, Teensy, SAM DUE, RP2040-based boards, besides ESP8266,
   ESP32 (ESP32, ESP32_S2, ESP32_S3 and ESP32_C3) and WT32_ETH01
-  
+
   Ethernet shields W5100, W5200, W5500, ENC28J60, Teensy 4.1 NativeEthernet/QNEthernet.
-   
+
   Based on and modified from MQTTPubSubClient Library (https://github.com/hideakitai/MQTTPubSubClient)
-  
+
   Built by Khoi Hoang https://github.com/khoih-prog/MQTTPubSubClient_Generic
   Licensed under MIT license
  *****************************************************************************************************************************/
- 
+
 #include "defines.h"
 
 #define WEBSOCKETS_NETWORK_TYPE     NETWORK_WIFININA
@@ -62,44 +62,48 @@ void setup()
 {
   // Debug console
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStart WiFiNINA_MQTToverWebSocket on ")); Serial.print(BOARD_NAME);
-  Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
+  Serial.print(F("\nStart WiFiNINA_MQTToverWebSocket on "));
+  Serial.print(BOARD_NAME);
+  Serial.print(F(" with "));
+  Serial.println(SHIELD_TYPE);
   Serial.println(WIFININA_GENERIC_VERSION);
   Serial.println(WIFI_WEBSERVER_VERSION);
   Serial.println(WEBSOCKETS_GENERIC_VERSION);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
 
-/////////////////////////////////////
- 
+  /////////////////////////////////////
+
   // check for the presence of the shield
   if (WiFi.status() == WL_NO_MODULE)
   {
     Serial.println(F("WiFi shield not present"));
+
     // don't continue
     while (true);
   }
 
   String fv = WiFi.firmwareVersion();
-  
+
   if (fv < WIFI_FIRMWARE_LATEST_VERSION)
   {
     Serial.println(F("Please upgrade the firmware"));
   }
-  
+
   Serial.print(F("Connecting to SSID: "));
   Serial.println(ssid);
-  
+
   status = WiFi.begin(ssid, pass);
 
   delay(1000);
-   
+
   // attempt to connect to WiFi network
   while ( status != WL_CONNECTED)
   {
     delay(500);
-        
+
     // Connect to WPA/WPA2 network
     status = WiFi.status();
   }
@@ -110,8 +114,10 @@ void setup()
   /////////////////////////////////////
 
   // server address, port and URL
-  Serial.print("Connecting to WebSockets Server @ "); Serial.print(WS_SERVER);
-  Serial.print(", port "); Serial.println(WS_PORT);
+  Serial.print("Connecting to WebSockets Server @ ");
+  Serial.print(WS_SERVER);
+  Serial.print(", port ");
+  Serial.println(WS_PORT);
 
   client.begin(WS_SERVER, WS_PORT, "/", "mqtt");  // "mqtt" is required
 
@@ -140,21 +146,22 @@ void setup()
   mqttClient.subscribe(PubTopic, [](const String & payload, const size_t size)
   {
     Serial.print("Subcribed to ");
-    Serial.print(PubTopic); Serial.print(" => ");
+    Serial.print(PubTopic);
+    Serial.print(" => ");
     Serial.println(payload);
   });
 
   mqttClient.publish(PubTopic, PubMessage);
 }
 
-void loop() 
+void loop()
 {
   mqttClient.update();  // should be called
 
   // publish message
   static uint32_t prev_ms = millis();
-  
-  if (millis() > prev_ms + 30000) 
+
+  if (millis() > prev_ms + 30000)
   {
     prev_ms = millis();
     mqttClient.publish(PubTopic, PubMessage);

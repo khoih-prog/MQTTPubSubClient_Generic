@@ -1,4 +1,4 @@
-# MQTTPubSubClient_Generic client for ESP8266, ESP32, etc.
+# MQTTPubSubClient_Generic Library (MQTT Client for ESP8266, ESP32, etc.)
 
 [![arduino-library-badge](https://www.ardu-badge.com/badge/MQTTPubSubClient_Generic.svg?)](https://www.ardu-badge.com/MQTTPubSubClient_Generic)
 [![GitHub release](https://img.shields.io/github/release/khoih-prog/MQTTPubSubClient_Generic.svg)](https://github.com/khoih-prog/MQTTPubSubClient_Generic/releases)
@@ -6,8 +6,11 @@
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](#Contributing)
 [![GitHub issues](https://img.shields.io/github/issues/khoih-prog/MQTTPubSubClient_Generic.svg)](http://github.com/khoih-prog/MQTTPubSubClient_Generic/issues)
 
+
 <a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Donate to my libraries using BuyMeACoffee" style="height: 50px !important;width: 181px !important;" ></a>
 <a href="https://www.buymeacoffee.com/khoihprog6" title="Donate to my libraries using BuyMeACoffee"><img src="https://img.shields.io/badge/buy%20me%20a%20coffee-donate-orange.svg?logo=buy-me-a-coffee&logoColor=FFDD00" style="height: 20px !important;width: 200px !important;" ></a>
+<a href="https://profile-counter.glitch.me/khoih-prog/count.svg" title="Total khoih-prog Visitor count"><img src="https://profile-counter.glitch.me/khoih-prog/count.svg" style="height: 30px;width: 200px;"></a>
+<a href="https://profile-counter.glitch.me/khoih-prog-MQTTPubSubClient_Generic/count.svg" title="MQTTPubSubClient_Generic Visitor count"><img src="https://profile-counter.glitch.me/khoih-prog-MQTTPubSubClient_Generic/count.svg" style="height: 30px;width: 200px;"></a>
 
 
 ---
@@ -45,6 +48,7 @@
   * [10. For RTL8720DN boards using AmebaD core](#10-for-rtl8720dn-boards-using-amebad-core)
   * [11. For SAMD21 and SAMD51 boards using ArduinoCore-fab-sam core](#11-For-SAMD21-and-SAMD51-boards-using-ArduinoCore-fab-sam-core)
   * [12. For Seeeduino RP2040 boards](#12-For-Seeeduino-RP2040-boards)
+  * [13. For Seeeduino nRF52840 boards](#13-For-Seeeduino-nRF52840-boards)
 * [Libraries' Patches](#libraries-patches)
   * [1. For application requiring 2K+ HTML page](#1-for-application-requiring-2k-html-page)
   * [2. For Ethernet library](#2-for-ethernet-library)
@@ -96,6 +100,9 @@
     * [3. WiFiNINA_MQTToverWebSocketSecure](examples/WiFiNINA/WiFiNINA_MQTToverWebSocketSecure)
     * [4. WiFiNINA_MQTTSecure](examples/WiFiNINA/WiFiNINA_MQTTSecure)
     * [5. WiFiNINA_MQTTSecureAWS](examples/WiFiNINA/WiFiNINA_MQTTSecureAWS)
+  * [7. For WiFi101](#6-For-WiFi101)
+    * [1. WiFiMQTT](examples/WiFi101/WiFiMQTT)
+    * [2. WiFiMQTToverWebSocket](examples/WiFi101/WiFiMQTToverWebSocket)
 * [Example EtherMQTToverWebSocket](#example-EtherMQTToverWebSocket)
   * [1. File EtherMQTToverWebSocket.ino](#1-file-EtherMQTToverWebSocketino)
   * [2. File defines.h](#2-file-definesh)
@@ -211,7 +218,7 @@ This [**MQTTPubSubClient_Generic** library](https://github.com/khoih-prog/MQTTPu
 #### Currently supported WiFi shields/modules
 
 1. WiFiNINA using [`WiFiNINA_Generic library`](https://github.com/khoih-prog/WiFiNINA_Generic)
-2. WiFi101 using [`WiFi101 library v0.16.1+`](https://github.com/arduino-libraries/WiFi101)
+2. WWiFi101 using [`WiFi101_Generic library`](https://github.com/khoih-prog/WiFi101_Generic)  **New**
 3. U-Blox W101, W102 using [`WiFiNINA_Generic library`](https://github.com/khoih-prog/WiFiNINA_Generic)
 4. ESP8266-AT command using [`WiFiEspAT library`](https://github.com/jandrassy/WiFiEspAT)
 5. ESP8266/ESP32-AT command using [`ESP_AT_Lib library`](https://github.com/khoih-prog/ESP_AT_Lib) and [`ESP8266_AT_WebServer`](ESP8266_AT_WebServer)
@@ -239,17 +246,17 @@ This [**MQTTPubSubClient_Generic** library](https://github.com/khoih-prog/MQTTPu
  2. [`Teensy core v1.57+`](https://www.pjrc.com/teensy/td_download.html) for Teensy (4.1, 4.0, 3.6, 3.5, 3,2, 3.1, 3.0) boards.
  3. [`Arduino SAM DUE core v1.6.12+`](https://github.com/arduino/ArduinoCore-sam) for SAM DUE ARM Cortex-M3 boards. **Not yet**
  4. [`Arduino SAMD core 1.8.13+`](https://github.com/arduino/ArduinoCore-samd) for SAMD ARM Cortex-M0+ boards. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-samd.svg)](https://github.com/arduino/ArduinoCore-samd/releases/latest)
- 5. [`Adafruit SAMD core 1.7.10+`](https://github.com/adafruit/ArduinoCore-samd) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
+ 5. [`Adafruit SAMD core 1.7.11+`](https://github.com/adafruit/ArduinoCore-samd) for SAMD ARM Cortex-M0+ and M4 boards (Nano 33 IoT, etc.). [![GitHub release](https://img.shields.io/github/release/adafruit/ArduinoCore-samd.svg)](https://github.com/adafruit/ArduinoCore-samd/releases/latest)
  6. [`Seeeduino SAMD core 1.8.3+`](https://github.com/Seeed-Studio/ArduinoCore-samd) for SAMD21/SAMD51 boards (XIAO M0, Wio Terminal, etc.). [![Latest release](https://img.shields.io/github/release/Seeed-Studio/ArduinoCore-samd.svg)](https://github.com/Seeed-Studio/ArduinoCore-samd/releases/latest/)
  7. [`Adafruit nRF52 v1.3.0+`](https://github.com/adafruit/Adafruit_nRF52_Arduino) for nRF52 boards such as Adafruit NRF52840_FEATHER, NRF52832_FEATHER, NRF52840_FEATHER_SENSE, NRF52840_ITSYBITSY, NRF52840_CIRCUITPLAY, NRF52840_CLUE, NRF52840_METRO, NRF52840_PCA10056, PARTICLE_XENON, **NINA_B302_ublox**, etc. [![GitHub release](https://img.shields.io/github/release/adafruit/Adafruit_nRF52_Arduino.svg)](https://github.com/adafruit/Adafruit_nRF52_Arduino/releases/latest)
  8. [`ESP32 Core 2.0.5+`](https://github.com/espressif/arduino-esp32) for ESP32-based boards. [![Latest release](https://img.shields.io/github/release/espressif/arduino-esp32.svg)](https://github.com/espressif/arduino-esp32/releases/latest/)
  9. [`ESP8266 Core 3.0.2+`](https://github.com/esp8266/Arduino) for ESP8266-based boards. [![Latest release](https://img.shields.io/github/release/esp8266/Arduino.svg)](https://github.com/esp8266/Arduino/releases/latest/). To use ESP8266 core 2.7.1+ for LittleFS.
-10. [`ArduinoCore-mbed mbed_rp2040, mbed_nano, mbed_portenta core 3.3.0+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) **Portenta_H7, RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
-11. [`Earle Philhower's arduino-pico core v2.6.0+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, RASPBERRY_PI_PICO_W, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
+10. [`ArduinoCore-mbed mbed_rp2040, mbed_nano, mbed_portenta core 3.4.1+`](https://github.com/arduino/ArduinoCore-mbed) for Arduino (Use Arduino Board Manager) **Portenta_H7, RP2040-based boards, such as Nano_RP2040_Connect, RASPBERRY_PI_PICO**. [![GitHub release](https://img.shields.io/github/release/arduino/ArduinoCore-mbed.svg)](https://github.com/arduino/ArduinoCore-mbed/releases/latest)
+11. [`Earle Philhower's arduino-pico core v2.6.3+`](https://github.com/earlephilhower/arduino-pico) for RP2040-based boards such as **RASPBERRY_PI_PICO, RASPBERRY_PI_PICO_W, ADAFRUIT_FEATHER_RP2040 and GENERIC_RP2040**, etc. [![GitHub release](https://img.shields.io/github/release/earlephilhower/arduino-pico.svg)](https://github.com/earlephilhower/arduino-pico/releases/latest)
 12. [`Arduino Core for STM32 v2.3.0+`](https://github.com/stm32duino/Arduino_Core_STM32) for STM32F/L/H/G/WB/MP1 boards. [![GitHub release](https://img.shields.io/github/release/stm32duino/Arduino_Core_STM32.svg)](https://github.com/stm32duino/Arduino_Core_STM32/releases/latest). Use STM32 core `v2.2.0` for LAN8720 or compile error.
 
-13. [`WiFiNINA_Generic library v1.8.14-6+`](https://github.com/khoih-prog/WiFiNINA_Generic) if for WiFiNINA. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
-14. [`EthernetWebServer library v2.2.3+`](https://github.com/khoih-prog/EthernetWebServer) if necessary to use Ethernet modules/shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer.svg?)](https://www.ardu-badge.com/EthernetWebServer)
+13. [`WiFiNINA_Generic library v1.8.15-1+`](https://github.com/khoih-prog/WiFiNINA_Generic) if for WiFiNINA. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiNINA_Generic.svg?)](https://www.ardu-badge.com/WiFiNINA_Generic).
+14. [`EthernetWebServer library v2.3.0+`](https://github.com/khoih-prog/EthernetWebServer) if necessary to use Ethernet modules/shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer.svg?)](https://www.ardu-badge.com/EthernetWebServer)
 15. [`EthernetWebServer_STM32 library v1.5.0+`](https://github.com/khoih-prog/EthernetWebServer_STM32) if necessary to use Ethernet modules/shields. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/EthernetWebServer_STM32.svg?)](https://www.ardu-badge.com/EthernetWebServer_STM32)
 16. [`WebServer_WT32_ETH01 library v1.5.1+`](https://github.com/khoih-prog/WebServer_WT32_ETH01) if necessary to use WT32_ETH01 boards. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebServer_WT32_ETH01.svg?)](https://www.ardu-badge.com/WebServer_WT32_ETH01)
 17. Depending on which Ethernet card you're using:
@@ -258,11 +265,11 @@ This [**MQTTPubSubClient_Generic** library](https://github.com/khoih-prog/MQTTPu
    - [`UIPEthernet library v2.0.12+`](https://github.com/UIPEthernet/UIPEthernet) for ENC28J60. [![GitHub release](https://img.shields.io/github/release/UIPEthernet/UIPEthernet.svg)](https://github.com/UIPEthernet/UIPEthernet/releases/latest)
    - [`STM32Ethernet library v1.3.0+`](https://github.com/stm32duino/STM32Ethernet) for built-in LAN8742A Ethernet on (Nucleo-144, Discovery). [![GitHub release](https://img.shields.io/github/release/stm32duino/STM32Ethernet.svg)](https://github.com/stm32duino/STM32Ethernet/releases/latest). To be used with [`LwIP library v2.1.2+`](https://github.com/stm32duino/LwIP). [![GitHub release](https://img.shields.io/github/release/stm32duino/LwIP.svg)](https://github.com/stm32duino/LwIP/releases/latest).
    - [`NativeEthernet Library version stable111+`](https://github.com/vjmuzik/NativeEthernet) for Teensy 4.1 built-in Ethernet.
-   - [`QNEthernet Library version v0.15.0+`](https://github.com/ssilverman/QNEthernet) Teensy 4.1 built-in Ethernet. **New**
+   - [`QNEthernet Library version v0.16.0+`](https://github.com/ssilverman/QNEthernet) Teensy 4.1 built-in Ethernet. **New**
    
-18. [`WiFiWebServer library v1.9.5+`](https://github.com/khoih-prog/WiFiWebServer) if necessary to use certain WiFi/WiFiNINA features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiWebServer.svg?)](https://www.ardu-badge.com/WiFiWebServer)
-19. [`Modified WiFi101 Library v0.16.1+`](https://github.com/khoih-prog/WiFi101) to use SAMD MKR1000, etc. boards with WiFi101.
-20. [`WebSockets_Generic library v2.16.0+`](https://github.com/khoih-prog/WebSockets_Generic) if necessary to use `MQTT-over-WebSockets` features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebSockets_Generic.svg?)](https://www.ardu-badge.com/WebSockets_Generic)
+18. [`WiFiWebServer library v1.10.1+`](https://github.com/khoih-prog/WiFiWebServer) if necessary to use certain WiFi/WiFiNINA features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFiWebServer.svg?)](https://www.ardu-badge.com/WiFiWebServer)
+19. [`WiFi101_Generic Library v1.0.0+`](https://github.com/khoih-prog/WiFi101_Generic) to use SAMD MKR1000, etc. boards with WiFi101 to send large data. To install. check [![arduino-library-badge](https://www.ardu-badge.com/badge/WiFi101_Generic.svg?)](https://www.ardu-badge.com/WiFi101_Generic).
+20. [`WebSockets_Generic library v2.16.1+`](https://github.com/khoih-prog/WebSockets_Generic) if necessary to use `MQTT-over-WebSockets` features. To install, check [![arduino-library-badge](https://www.ardu-badge.com/badge/WebSockets_Generic.svg?)](https://www.ardu-badge.com/WebSockets_Generic)
 
 ---
 ---
@@ -278,9 +285,9 @@ You can also use this link [![arduino-library-badge](https://www.ardu-badge.com/
 Another way to install is to:
 
 1. Navigate to [**MQTTPubSubClient_Generic**](https://github.com/khoih-prog/MQTTPubSubClient_Generic) page.
-2. Download the latest release `MQTTPubSubClient_Generic-master.zip`.
-3. Extract the zip file to `MQTTPubSubClient_Generic-master` directory 
-4. Copy whole `MQTTPubSubClient_Generic-master` folder to Arduino libraries' directory such as `~/Arduino/libraries/`.
+2. Download the latest release `MQTTPubSubClient_Generic-main.zip`.
+3. Extract the zip file to `MQTTPubSubClient_Generic-main` directory 
+4. Copy whole `MQTTPubSubClient_Generic-main` folder to Arduino libraries' directory such as `~/Arduino/libraries/`.
 
 ### VS Code & PlatformIO:
 
@@ -300,7 +307,6 @@ Another way to install is to:
 **To be able to compile, run and automatically detect and display BOARD_NAME on nRF52840/nRF52832 boards**, you have to copy the whole [nRF52 Packages_Patches](Packages_Patches/adafruit/hardware/nrf52/1.3.0) directory into Adafruit nRF52 directory (~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0). 
 
 Supposing the Adafruit nRF52 version is 1.3.0. These files must be copied into the directory:
-
 - `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/platform.txt`
 - `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/boards.txt`
 - `~/.arduino15/packages/adafruit/hardware/nrf52/1.3.0/cores/nRF5/Udp.h`
@@ -399,16 +405,16 @@ Whenever the above-mentioned compiler error issue is fixed with the new Arduino 
 
 #### 5. For Adafruit SAMD boards
  
- ***To be able to compile, run and automatically detect and display BOARD_NAME on Adafruit SAMD (Itsy-Bitsy M4, etc) boards***, you have to copy the whole [Adafruit SAMD Packages_Patches](Packages_Patches/adafruit/hardware/samd/1.7.10) directory into Adafruit samd directory (~/.arduino15/packages/adafruit/hardware/samd/1.7.10). 
+ ***To be able to compile, run and automatically detect and display BOARD_NAME on Adafruit SAMD (Itsy-Bitsy M4, etc) boards***, you have to copy the whole [Adafruit SAMD Packages_Patches](Packages_Patches/adafruit/hardware/samd/1.7.11) directory into Adafruit samd directory (~/.arduino15/packages/adafruit/hardware/samd/1.7.11). 
 
-Supposing the Adafruit SAMD core version is 1.7.10. This file must be copied into the directory:
+Supposing the Adafruit SAMD core version is 1.7.11. These files must be copied into the directory:
 
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.10/platform.txt`
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.10/cores/arduino/Print.h`
-- `~/.arduino15/packages/adafruit/hardware/samd/1.7.10/cores/arduino/Print.cpp`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.11/platform.txt`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.11/cores/arduino/Print.h`
+- `~/.arduino15/packages/adafruit/hardware/samd/1.7.11/cores/arduino/Print.cpp`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
-This file must be copied into the directory:
+These files must be copied into the directory:
 
 - `~/.arduino15/packages/adafruit/hardware/samd/x.yy.zz/platform.txt`
 - `~/.arduino15/packages/adafruit/hardware/samd/x.yy.zz/cores/arduino/Print.h`
@@ -418,7 +424,7 @@ This file must be copied into the directory:
  
  ***To be able to compile, run and automatically detect and display BOARD_NAME on Seeeduino SAMD (XIAO M0, Wio Terminal, etc) boards***, you have to copy the whole [Seeeduino SAMD Packages_Patches](Packages_Patches/Seeeduino/hardware/samd/1.8.3) directory into Seeeduino samd directory (~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3). 
 
-Supposing the Seeeduino SAMD core version is 1.8.3. This file must be copied into the directory:
+Supposing the Seeeduino SAMD core version is 1.8.3. These files must be copied into the directory:
 
 - `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3/platform.txt`
 - `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3/cores/arduino/Arduino.h`
@@ -426,7 +432,7 @@ Supposing the Seeeduino SAMD core version is 1.8.3. This file must be copied int
 - `~/.arduino15/packages/Seeeduino/hardware/samd/1.8.3/cores/arduino/Print.cpp`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
-This file must be copied into the directory:
+These files must be copied into the directory:
 
 - `~/.arduino15/packages/Seeeduino/hardware/samd/x.yy.zz/platform.txt`
 - `~/.arduino15/packages/Seeeduino/hardware/samd/x.yy.zz/cores/arduino/Arduino.h`
@@ -437,24 +443,28 @@ This file must be copied into the directory:
 
 #### 7.1 For STM32 boards to use LAN8720
 
+For `Generic STM32F4 series` boards, such as `STM32F407VE`, using `LAN8720`, please use STM32 core `v2.2.0` as breaking core `v2.3.0` creates the compile error.
+
+---
+
 To use LAN8720 on some STM32 boards 
 
 - **Nucleo-144 (F429ZI, NUCLEO_F746NG, NUCLEO_F746ZG, NUCLEO_F756ZG)**
 - **Discovery (DISCO_F746NG)**
 - **STM32F4 boards (BLACK_F407VE, BLACK_F407VG, BLACK_F407ZE, BLACK_F407ZG, BLACK_F407VE_Mini, DIYMORE_F407VGT, FK407M1)**
 
-you have to copy the files [stm32f4xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/2.3.0/system/STM32F4xx) and [stm32f7xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/2.3.0/system/STM32F7xx) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/2.3.0/system) to overwrite the old files.
+you have to copy the files [stm32f4xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/2.2.0/system/STM32F4xx) and [stm32f7xx_hal_conf_default.h](Packages_Patches/STM32/hardware/stm32/2.2.0/system/STM32F7xx) into STM32 stm32 directory (~/.arduino15/packages/STM32/hardware/stm32/2.2.0/system) to overwrite the old files.
 
-Supposing the STM32 stm32 core version is 2.3.0. These files must be copied into the directory:
+Supposing the STM32 stm32 core version is 2.2.0. These files must be copied into the directory:
 
-- `~/.arduino15/packages/STM32/hardware/stm32/2.3.0/system/STM32F4xx/stm32f4xx_hal_conf_default.h` for STM32F4.
-- `~/.arduino15/packages/STM32/hardware/stm32/2.3.0/system/STM32F7xx/stm32f7xx_hal_conf_default.h` for Nucleo-144 STM32F7.
+- `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/system/STM32F4xx/stm32f4xx_hal_conf_default.h` for STM32F4.
+- `~/.arduino15/packages/STM32/hardware/stm32/2.2.0/system/STM32F7xx/stm32f7xx_hal_conf_default.h` for Nucleo-144 STM32F7.
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz,
 these files must be copied into the corresponding directory:
 
 - `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F4xx/stm32f4xx_hal_conf_default.h`
-- `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F7xx/stm32f7xx_hal_conf_default.h
+- `~/.arduino15/packages/STM32/hardware/stm32/x.yy.zz/system/STM32F7xx/stm32f7xx_hal_conf_default.h`
 
 
 #### 7.2 For STM32 boards to use Serial1
@@ -507,12 +517,12 @@ With core after v1.5.0, this step is not necessary anymore thanks to the PR [Add
 
 #### 9. For Portenta_H7 boards using Arduino IDE in Linux
 
-  **To be able to upload firmware to Portenta_H7 using Arduino IDE in Linux (Ubuntu, etc.)**, you have to copy the file [portenta_post_install.sh](Packages_Patches/arduino/hardware/mbed_portenta/3.3.0/portenta_post_install.sh) into mbed_portenta directory (~/.arduino15/packages/arduino/hardware/mbed_portenta/3.3.0/portenta_post_install.sh). 
+  **To be able to upload firmware to Portenta_H7 using Arduino IDE in Linux (Ubuntu, etc.)**, you have to copy the file [portenta_post_install.sh](Packages_Patches/arduino/hardware/mbed_portenta/3.4.1/portenta_post_install.sh) into mbed_portenta directory (~/.arduino15/packages/arduino/hardware/mbed_portenta/3.4.1/portenta_post_install.sh). 
   
   Then run the following command using `sudo`
   
 ```
-$ cd ~/.arduino15/packages/arduino/hardware/mbed_portenta/3.3.0
+$ cd ~/.arduino15/packages/arduino/hardware/mbed_portenta/3.4.1
 $ chmod 755 portenta_post_install.sh
 $ sudo ./portenta_post_install.sh
 ```
@@ -525,9 +535,9 @@ This will create the file `/etc/udev/rules.d/49-portenta_h7.rules` as follows:
 SUBSYSTEMS=="usb", ATTRS{idVendor}=="2341", ATTRS{idProduct}=="035b", GROUP="plugdev", MODE="0666"
 ```
 
-Supposing the ArduinoCore-mbed core version is 3.3.0. Now only one file must be copied into the directory:
+Supposing the ArduinoCore-mbed core version is 3.4.1. Now only one file must be copied into the directory:
 
-- `~/.arduino15/packages/arduino/hardware/mbed_portenta/3.3.0/portenta_post_install.sh`
+- `~/.arduino15/packages/arduino/hardware/mbed_portenta/3.4.1/portenta_post_install.sh`
 
 Whenever a new version is installed, remember to copy this files into the new version directory. For example, new version is x.yy.zz
 
@@ -552,11 +562,11 @@ This file must be copied into the directory:
 
 #### 11. For SAMD21 and SAMD51 boards using ArduinoCore-fab-sam core
  
- To avoid compile error relating to SAMD21/SAMD51, you have to copy the file [ArduinoCore-fab-sam core pgmspace.h](Packages_Patches/Fab_SAM_Arduino/hardware/samd/1.7.0/boards.txt) into `ArduinoCore-fab-sam` samd directory (~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/1.7.0/boards.txt). 
+ To avoid compile error relating to SAMD21/SAMD51, you have to copy the file [ArduinoCore-fab-sam core pgmspace.h](Packages_Patches/Fab_SAM_Arduino/hardware/samd/1.9.0/boards.txt) into `ArduinoCore-fab-sam` samd directory (~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/1.9.0/boards.txt). 
 
-Supposing the `ArduinoCore-fab-sam` samd core version is 1.7.0. This file must be copied into the directory:
+Supposing the `ArduinoCore-fab-sam` samd core version is 1.9.0. This file must be copied into the directory:
 
-- `~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/1.7.0/boards.txt`
+- `~/.arduino15/packages/Fab_SAM_Arduino/hardware/samd/1.9.0/boards.txt`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
 This file must be copied into the directory:
@@ -568,17 +578,38 @@ This file must be copied into the directory:
  
  ***To be able to compile, run and automatically detect and display BOARD_NAME on Seeeduino RP2040 (XIAO RP2040, Wio RP2040 Mini) boards***, you have to copy the whole [Seeeduino RP2040 Packages_Patches](Packages_Patches/Seeeduino/hardware/rp2040/2.7.2) directory into Seeeduino samd directory (~/.arduino15/packages/Seeeduino/hardware/rp2040/2.7.2). 
 
-Supposing the Seeeduino SAMD core version is 2.7.2. This file must be copied into the directory:
+Supposing the Seeeduino RP2040 core version is 2.7.2. These files must be copied into the directory:
 
 - `~/.arduino15/packages/Seeeduino/hardware/rp2040/2.7.2/boards.txt`
 - `~/.arduino15/packages/Seeeduino/hardware/rp2040/2.7.2/variants/Seeed_XIAO_RP2040/pins_arduino.h`
 
 Whenever a new version is installed, remember to copy this file into the new version directory. For example, new version is x.yy.zz
-This file must be copied into the directory:
+These files must be copied into the directory:
 
 - `~/.arduino15/packages/Seeeduino/hardware/samd/x.yy.zz/boards.txt`
 - `~/.arduino15/packages/Seeeduino/hardware/samd/x.yy.zz/variants/Seeed_XIAO_RP2040/pins_arduino.h`
 
+
+---
+
+#### 13. For Seeeduino nRF52840 boards
+
+**To be able to compile and run on Xiao nRF52840 boards**, you have to copy the whole [nRF52 1.0.0](Packages_Patches/Seeeduino/hardware/nrf52/1.0.0) directory into Seeeduino nRF52 directory (~/.arduino15/packages/Seeeduino/hardware/nrf52/1.0.0). 
+
+Supposing the Seeeduino nRF52 version is 1.0.0. These files must be copied into the directory:
+
+- **`~/.arduino15/packages/Seeeduino/hardware/nrf52/1.0.0/platform.txt`**
+- **`~/.arduino15/packages/Seeeduino/hardware/nrf52/1.0.0/cores/nRF5/Print.h`**
+- **`~/.arduino15/packages/Seeeduino/hardware/nrf52/1.0.0/cores/nRF5/Print.cpp`**
+- **`~/.arduino15/packages/Seeeduino/hardware/nrf52/1.0.0/cores/nRF5/Udp.h`**
+
+Whenever a new version is installed, remember to copy these files into the new version directory. For example, new version is x.yy.z
+These files must be copied into the directory:
+
+- **`~/.arduino15/packages/Seeeduino/hardware/nrf52/x.yy.z/platform.txt`**
+- **`~/.arduino15/packages/Seeeduino/hardware/nrf52/x.yy.z/cores/nRF5/Print.h`**
+- **`~/.arduino15/packages/Seeeduino/hardware/nrf52/x.yy.z/cores/nRF5/Print.cpp`**
+- **`~/.arduino15/packages/Seeeduino/hardware/nrf52/x.yy.z/cores/nRF5/Udp.h`**
 
 ---
 ---
@@ -985,7 +1016,7 @@ Connect as follows. To program, use **STM32CubeProgrammer** or Arduino IDE with
 
 
 <p align="center">
-    <img src="https://github.com/khoih-prog/MQTTPubSubClient_Generic/blob/main/pics/STM32F407VET6.png">
+    <img src="https://github.com/khoih-prog/MQTTPubSubClient_Generic/raw/main/pics/STM32F407VET6.png">
 </p>
 
 ---
@@ -1045,6 +1076,11 @@ Connect FDTI (USB to Serial) as follows:
  4. [WiFiNINA_MQTTSecure](examples/WiFiNINA/WiFiNINA_MQTTSecure)
  5. [WiFiNINA_MQTTSecureAWS](examples/WiFiNINA/WiFiNINA_MQTTSecureAWS)
  
+#### 7. For WiFi101
+
+ 1. [WiFiMQTT](examples/WiFi101/WiFiMQTT)
+ 2. [WiFiMQTToverWebSocket](examples/WiFi101/WiFiMQTToverWebSocket)
+ 
 ---
 ---
 
@@ -1070,9 +1106,9 @@ https://github.com/khoih-prog/MQTTPubSubClient_Generic/blob/168f2ce72da6950d577d
 
 This is terminal debug output when running [WiFiMQTToverWebSocket](examples/WiFi/WiFiMQTToverWebSocket) on **ESP8266_NODEMCU_ESP12E** connecting to `test.mosquitto.org` MQTT server.
 
-```
+```cpp
 Start WiFiMQTToverWebSocket on ESP8266_NODEMCU_ESP12E with ESP WiFi using WiFi Library
-MQTTPubSubClient_Generic v1.2.0
+MQTTPubSubClient_Generic v1.2.1
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.145
 SSID: HueNet1, Signal strength (RSSI):-39 dBm
@@ -1088,9 +1124,9 @@ Subscribed to /mqttPubSub => Hello from ESP8266_NODEMCU_ESP12E
 
 This is terminal debug output when running [WiFiMQTToverWebSocketSecure](examples/WiFi/WiFiMQTToverWebSocketSecure) on **ESP32_DEV** connecting to `public.cloud.shiftr.io:443` WebSockets server.
 
-```
+```cpp
 Start WiFiMQTToverWebSocketSecure on ESP32_DEV
-MQTTPubSubClient_Generic v1.2.0
+MQTTPubSubClient_Generic v1.2.1
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.93
 SSID: HueNet1, Signal strength (RSSI):-35 dBm
@@ -1106,10 +1142,10 @@ Subscribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on ESP32_DEV
 
 This is terminal debug output when running [WiFiMQTToverWebSocket](examples/WiFi/WiFiMQTToverWebSocket) on **SAMD_NANO_33_IOT** connecting to `test.mosquitto.org` MQTT server.
 
-```
+```cpp
 Start WiFiMQTToverWebSocket on SAMD_NANO_33_IOT with WiFiNINA using WiFiNINA_Generic Library
-WiFiWebServer v1.7.0
-MQTTPubSubClient_Generic v1.2.0
+WiFiWebServer v1.10.1
+MQTTPubSubClient_Generic v1.2.1
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.150
 SSID: HueNet1, Signal strength (RSSI):-15 dBm
@@ -1126,10 +1162,10 @@ Subscribed to /mqttPubSub => Hello from SAMD_NANO_33_IOT with WiFiNINA using WiF
 This is terminal debug output when running [EtherMQTToverWebSocket](examples/Ethernet/EtherMQTToverWebSocket) on **STM32F7 NUCLEO_F767ZI** connecting to `test.mosquitto.org` MQTT server.
 
 
-```
+```cpp
 Start EtherMQTToverWebSocket_STM32 on NUCLEO_F767ZI with W5x00 using default Ethernet_Generic Library
-EthernetWebServer_STM32 v1.4.0
-MQTTPubSubClient_Generic v1.2.0
+EthernetWebServer_STM32 v1.5.0
+MQTTPubSubClient_Generic v1.2.1
 [EWS] Board : NUCLEO_F767ZI , setCsPin: 10
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1153,10 +1189,10 @@ Subscribed to /mqttPubSub => Hello from NUCLEO_F767ZI with W5x00 using default E
 This is terminal debug output when running [EtherMQTToverWebSocket_STM32](examples/STM32/EtherMQTToverWebSocket_STM32) on **STM32F7 NUCLEO_F767ZI-ETH01 with LAN8742A** connecting to `test.mosquitto.org` MQTT server.
 
 
-```
+```cpp
 Start EtherMQTToverWebSocket_STM32 on NUCLEO_F767ZI with LAN8742A Ethernet & STM32Ethernet Library
-EthernetWebServer_STM32 v1.4.0
-MQTTPubSubClient_Generic v1.2.0
+EthernetWebServer_STM32 v1.5.0
+MQTTPubSubClient_Generic v1.2.1
 Connected! IP address: 192.168.2.88
 Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
@@ -1171,9 +1207,9 @@ Subscribed to /mqttPubSub => Hello from NUCLEO_F767ZI with LAN8742A Ethernet & S
 
 This is terminal debug output when running [MQTToverWebSocket_QNEthernet](examples/QNEthernet/MQTToverWebSocket_QNEthernet) on **TEENSY 4.1 with QNEthernet** connecting to `test.mosquitto.org` MQTT server.
 
-```
+```cpp
 Start MQTToverWebSocket_QNEthernet on TEENSY 4.1
-MQTTPubSubClient_Generic v1.2.0
+MQTTPubSubClient_Generic v1.2.1
 =========== USE_QN_ETHERNET ===========
 Initialize Ethernet using static IP => Connecting to WebSockets Server @ test.mosquitto.org
 Connecting to mqtt broker.... connected!
@@ -1188,10 +1224,10 @@ Subscribed to /mqttPubSub => Hello from TEENSY 4.1 using QNEthernet
 
 This is terminal debug output when running [EtherMQTToverWebSocket](examples/Ethernet/EtherMQTToverWebSocket) on **MBED RASPBERRY_PI_PICO with W5500 Ethernet** connecting to `test.mosquitto.org` MQTT server.
 
-```
+```cpp
 Start EtherMQTToverWebSocket on MBED RASPBERRY_PI_PICO
-EthernetWebServer v2.1.2
-MQTTPubSubClient_Generic v1.2.0
+EthernetWebServer v2.3.0
+MQTTPubSubClient_Generic v1.2.1
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 19
@@ -1227,10 +1263,10 @@ Subscribed to /mqttPubSub => Hello from MBED RASPBERRY_PI_PICO
 This is terminal debug output when running [EtherMQTToverWebSocket](examples/Ethernet/EtherMQTToverWebSocket) on **RASPBERRY_PI_PICO with W5500 Ethernet** connecting to `test.mosquitto.org` MQTT server.
 
 
-```
+```cpp
 Start EtherMQTToverWebSocket on RASPBERRY_PI_PICO with W5x00 using Ethernet_Generic Library on SPI1
-EthernetWebServer v2.1.2
-MQTTPubSubClient_Generic v1.2.0
+EthernetWebServer v2.3.0
+MQTTPubSubClient_Generic v1.2.1
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 15
@@ -1263,10 +1299,10 @@ Subscribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO with W5x00 using Ether
 This is terminal debug output when running [EtherMQTToverWebSocket](examples/Ethernet/EtherMQTToverWebSocket) on **TEENSY 4.0 with W5500 Ethernet** connecting to `test.mosquitto.org` MQTT server.
 
 
-```
+```cpp
 Start EtherMQTToverWebSocket on TEENSY 4.0 with W5x00 using Ethernet_Generic Library on SPI0/SPI
-EthernetWebServer v2.1.2
-MQTTPubSubClient_Generic v1.2.0
+EthernetWebServer v2.3.0
+MQTTPubSubClient_Generic v1.2.1
 [EWS] =========== USE_ETHERNET_GENERIC ===========
 [EWS] Default SPI pinout:
 [EWS] MOSI: 11
@@ -1296,9 +1332,9 @@ Subscribed to /mqttPubSub => Hello from TEENSY 4.0 with W5x00 using Ethernet_Gen
 
 This is terminal debug output when running [WiFiMQTT](examples/RP2040W/WiFiMQTT) on **RASPBERRY_PI_PICO_W** connecting to `public.cloud.shiftr.io` MQTT server.
 
-```
+```cpp
 Start WiFiMQTT on RASPBERRY_PI_PICO_W
-MQTTPubSubClient_Generic v1.2.0
+MQTTPubSubClient_Generic v1.2.1
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.77
 SSID: HueNet1, Signal strength (RSSI):0 dBm
@@ -1322,9 +1358,9 @@ MQTT received: /mqttPubSub - Hello from RASPBERRY_PI_PICO_W
 
 This is terminal debug output when running [WiFiMQTTSecure](examples/RP2040W/WiFiMQTTSecure) on **RASPBERRY_PI_PICO_W** connecting to `public.cloud.shiftr.io` MQTT server.
 
-```
+```cpp
 Start WiFiMQTTSecure on RASPBERRY_PI_PICO_W
-MQTTPubSubClient_Generic v1.2.0
+MQTTPubSubClient_Generic v1.2.1
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.77
 SSID: HueNet1, Signal strength (RSSI):0 dBm
@@ -1343,9 +1379,9 @@ Subscribed to /mqttPubSub => Hello from WiFiMQTTSecure on RASPBERRY_PI_PICO_W
 
 This is terminal debug output when running [WiFiMQTToverWebSocket](examples/RP2040W/WiFiMQTToverWebSocket) on **RASPBERRY_PI_PICO_W** connecting to `test.mosquitto.org` MQTT server.
 
-```
+```cpp
 Start WiFiMQTToverWebSocket on RASPBERRY_PI_PICO_W
-MQTTPubSubClient_Generic v1.2.0
+MQTTPubSubClient_Generic v1.2.1
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.77
 SSID: HueNet1, Signal strength (RSSI):0 dBm
@@ -1362,12 +1398,12 @@ Subscribed to /mqttPubSub => Hello from RASPBERRY_PI_PICO_W
 
 This is terminal debug output when running [WiFiNINA_MQTToverWebSocket](examples/WiFiNINA/WiFiNINA_MQTToverWebSocket) on **NANO_RP2040_CONNECT**, with WiFiNINA using `WiFiNINA_Generic` Library and `arduino-pico` core, connecting to `test.mosquitto.org` MQTT server.
 
-```
+```cpp
 Start WiFiNINA_MQTToverWebSocket on NANO_RP2040_CONNECT with WiFiNINA using WiFiNINA_Generic Library
-WiFiNINA_Generic v1.8.14-6
+WiFiNINA_Generic v1.8.15-1
 WiFiWebServer v1.9.5
-WebSockets_Generic v2.16.0
-MQTTPubSubClient_Generic v1.2.0
+WebSockets_Generic v2.16.1
+MQTTPubSubClient_Generic v1.2.1
 Please upgrade the firmware
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.105
@@ -1385,11 +1421,11 @@ Subscribed to /mqttPubSub => Hello from NANO_RP2040_CONNECT with WiFiNINA using 
 This is terminal debug output when running [WiFiNINA_MQTToverWebSocketSecure](examples/WiFiNINA/WiFiNINA_MQTToverWebSocketSecure) on **NANO_RP2040_CONNECT**, with WiFiNINA using `WiFiNINA_Generic` Library and `Arduino mbed_nano` core, connecting to `public.cloud.shiftr.io` Secured MQTT server.
 
 
-```
+```cpp
 Start WiFiNINA_MQTToverWebSocketSecure on Nano RP2040 Connect
-WiFiNINA_Generic v1.8.14-6
-WebSockets_Generic v2.16.0
-MQTTPubSubClient_Generic v1.2.0
+WiFiNINA_Generic v1.8.15-1
+WebSockets_Generic v2.16.1
+MQTTPubSubClient_Generic v1.2.1
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.105
 SSID: HueNet1, Signal strength (RSSI):-30 dBm
@@ -1406,11 +1442,11 @@ Subscribed to /mqttPubSub => Hello from WiFiMQTToverWebSocketSecure on Nano RP20
 
 This is terminal debug output when running [WiFiNINA_MQTToverWebSocketSecure](examples/WiFiNINA/WiFiNINA_MQTToverWebSocketSecure) on **SAMD_NANO_33_IOT**, with WiFiNINA using `WiFiNINA_Generic` Library, connecting to `public.cloud.shiftr.io` Secured MQTT server.
 
-```
+```cpp
 Start WiFiNINA_MQTToverWebSocketSecure on Nano RP2040 Connect
-WiFiNINA_Generic v1.8.14-6
-WebSockets_Generic v2.16.0
-MQTTPubSubClient_Generic v1.2.0
+WiFiNINA_Generic v1.8.15-1
+WebSockets_Generic v2.16.1
+MQTTPubSubClient_Generic v1.2.1
 Connecting to SSID: HueNet1
 You're connected to the network, IP = 192.168.2.105
 SSID: HueNet1, Signal strength (RSSI):-30 dBm
@@ -1484,6 +1520,8 @@ Submit issues to: [MQTTPubSubClient_Generic issues](https://github.com/khoih-pro
 18. Use new `waitForLink()` function of QNEthernet
 19. Add support to `RP2040W` using `MQTT`, `Secured MQTT` or `MQTT-over-WebSockets` with [arduino-pico core](https://github.com/earlephilhower/arduino-pico)
 20. Add support to `Nano_RP2040_Connect`, `Nano_33_IoT`, using `MQTT`, `Secured MQTT`, `MQTT-over-WebSockets` or `Secured MQTT-over-WebSockets` with [`WiFiNINA_Generic` library](https://github.com/khoih-prog/WiFiNINA_Generic) library
+21. Add support to `MKRWiFi1010`, etc., using `MQTT`, `MQTT-over-WebSockets` with new [`WiFi101_Generic` library](https://github.com/khoih-prog/WiFi101_Generic) library
+
 
 ---
 ---

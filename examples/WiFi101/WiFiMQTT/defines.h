@@ -23,51 +23,10 @@
 #define _WIFININA_LOGLEVEL_         3
 #define _MQTT_PUBSUB_LOGLEVEL_      4
 
-#if ( defined(ARDUINO_PORTENTA_H7_M7) || defined(ARDUINO_PORTENTA_H7_M4) )
-
-  #if defined(BOARD_NAME)
-    #undef BOARD_NAME
-  #endif
-
-  #if defined(CORE_CM7)
-    #warning Using Portenta H7 M7 core
-    #define BOARD_NAME            "PORTENTA_H7_M7"
-  #else
-    #warning Using Portenta H7 M4 core
-    #define BOARD_NAME            "PORTENTA_H7_M4"
-  #endif
-
-  #define USE_WIFI_PORTENTA_H7  true
-
-  #define USE_WIFI_NINA         false
-
-  // To use the default WiFi library here
-  #define USE_WIFI_CUSTOM       false
-
-#elif (ESP32)
-
-  #define USE_WIFI_NINA         false
-
-  // To use the default WiFi library here
-  #define USE_WIFI_CUSTOM       false
-
-#elif (ESP8266)
-
-  #define USE_WIFI_NINA         false
-
-  // To use the default WiFi library here
-  #define USE_WIFI_CUSTOM       true
-
-#elif ( defined(ARDUINO_SAMD_MKR1000)  || defined(ARDUINO_SAMD_MKRWIFI1010) )
+#if ( defined(ARDUINO_SAMD_MKR1000)  || defined(ARDUINO_SAMD_MKRWIFI1010) )
 
   #define USE_WIFI_NINA         false
   #define USE_WIFI101           true
-  #define USE_WIFI_CUSTOM       false
-
-#elif ( defined(ARDUINO_NANO_RP2040_CONNECT) || defined(ARDUINO_SAMD_NANO_33_IOT) )
-
-  #define USE_WIFI_NINA         true
-  #define USE_WIFI101           false
   #define USE_WIFI_CUSTOM       false
 
 #elif defined(ARDUINO_AVR_UNO_WIFI_REV2)
@@ -78,45 +37,13 @@
 
 #else
 
-  #define USE_WIFI_NINA         false
-  #define USE_WIFI101           false
-
-  // If not USE_WIFI_NINA, you can USE_WIFI_CUSTOM, then include the custom WiFi library here
-  #define USE_WIFI_CUSTOM       true
+  #error Only for WiFi101
 
 #endif
 
-#if (!USE_WIFI_NINA && USE_WIFI_CUSTOM)
-  #if (ESP8266)
-    #include "ESP8266WiFi.h"
-  #else
-    //#include "WiFi_XYZ.h"
-    #include "WiFiEspAT.h"
-    #define WIFI_USING_ESP_AT     true
-  #endif
-#endif
-
-#if WIFI_USING_ESP_AT
-  #define EspSerial       Serial1
-#endif
-
-#if USE_WIFI_PORTENTA_H7
-  #warning Using Portenta H7 WiFi
-  #define SHIELD_TYPE           "Portenta_H7 WiFi"
-#elif USE_WIFI_NINA
-  #warning Using WiFiNINA using WiFiNINA_Generic Library
-  #define SHIELD_TYPE           "WiFiNINA using WiFiNINA_Generic Library"
-#elif USE_WIFI101
+#if USE_WIFI101
   #warning Using WiFi101 using WiFi101 Library
   #define SHIELD_TYPE           "WiFi101 using WiFi101 Library"
-#elif (ESP32 || ESP8266)
-  #warning Using ESP WiFi with WiFi Library
-  #define SHIELD_TYPE           "ESP WiFi using WiFi Library"
-#elif USE_WIFI_CUSTOM
-  #warning Using Custom WiFi using Custom WiFi Library
-  #define SHIELD_TYPE           "Custom WiFi using Custom WiFi Library"
-#else
-  #define SHIELD_TYPE           "Unknown WiFi shield/Library"
 #endif
 
 #if ( defined(NRF52840_FEATHER) || defined(NRF52832_FEATHER) || defined(NRF52_SERIES) || defined(ARDUINO_NRF52_ADAFRUIT) || \

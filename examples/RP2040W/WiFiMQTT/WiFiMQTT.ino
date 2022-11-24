@@ -13,7 +13,7 @@
   Built by Khoi Hoang https://github.com/khoih-prog/MQTTPubSubClient_Generic
   Licensed under MIT license
  *****************************************************************************************************************************/
- 
+
 #if !( defined(ARDUINO_RASPBERRY_PI_PICO_W) )
   #error This code is intended to run only on the RP2040W boards ! Please check your Tools->Board setting.
 #endif
@@ -62,9 +62,11 @@ void setup()
 {
   // Debug console
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStart WiFiMQTT on ")); Serial.println(BOARD_NAME);
+  Serial.print(F("\nStart WiFiMQTT on "));
+  Serial.println(BOARD_NAME);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
 
   ///////////////////////////////////
@@ -73,22 +75,23 @@ void setup()
   if (WiFi.status() == WL_NO_MODULE)
   {
     Serial.println("Communication with WiFi module failed!");
+
     // don't continue
     while (true);
   }
 
   Serial.print(F("Connecting to SSID: "));
   Serial.println(ssid);
- 
+
   status = WiFi.begin(ssid, pass);
 
   delay(1000);
-   
+
   // attempt to connect to WiFi network
   while ( status != WL_CONNECTED)
   {
     delay(500);
-        
+
     // Connect to WPA/WPA2 network
     status = WiFi.status();
   }
@@ -97,15 +100,17 @@ void setup()
 
   ///////////////////////////////////
 
-  Serial.print("Connecting to WebSockets Server @ "); Serial.print(MQTT_SERVER);
-  Serial.print(", port "); Serial.println(MQTT_PORT);
-  
-  while (!client.connect(MQTT_SERVER, MQTT_PORT)) 
+  Serial.print("Connecting to WebSockets Server @ ");
+  Serial.print(MQTT_SERVER);
+  Serial.print(", port ");
+  Serial.println(MQTT_PORT);
+
+  while (!client.connect(MQTT_SERVER, MQTT_PORT))
   {
     Serial.print(".");
     delay(1000);
   }
-  
+
   Serial.println("\nConnected!");
 
   // initialize mqtt client
@@ -125,7 +130,7 @@ void setup()
   mqttClient.subscribe([](const String & topic, const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.println("MQTT received: " + topic + " - " + payload);
   });
 
@@ -133,23 +138,24 @@ void setup()
   mqttClient.subscribe(PubTopic, [](const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.print("Subcribed to ");
-    Serial.print(PubTopic); Serial.print(" => ");
+    Serial.print(PubTopic);
+    Serial.print(" => ");
     Serial.println(payload);
   });
 
   mqttClient.publish(PubTopic, PubMessage);
 }
 
-void loop() 
+void loop()
 {
   mqttClient.update();  // should be called
 
   // publish message
   static uint32_t prev_ms = millis();
-  
-  if (millis() > prev_ms + 30000) 
+
+  if (millis() > prev_ms + 30000)
   {
     prev_ms = millis();
     mqttClient.publish(PubTopic, PubMessage);

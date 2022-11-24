@@ -6,7 +6,7 @@
 /**
    The available packet types.
 */
-typedef enum 
+typedef enum
 {
   LWMQTT_NO_PACKET = 0,
   LWMQTT_CONNECT_PACKET = 1,

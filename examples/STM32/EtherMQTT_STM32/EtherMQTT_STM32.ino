@@ -1,14 +1,14 @@
 /****************************************************************************************************************************
   EtherMQTT_STM32.ino
   MQTT and MQTT over WebSoket Client for Arduino
-  
-  For nRF52, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, Teensy, SAM DUE, RP2040-based boards, besides ESP8266, 
+
+  For nRF52, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, Teensy, SAM DUE, RP2040-based boards, besides ESP8266,
   ESP32 (ESP32, ESP32_S2, ESP32_S3 and ESP32_C3) and WT32_ETH01
-  
+
   Ethernet shields W5100, W5200, W5500, ENC28J60, Teensy 4.1 NativeEthernet/QNEthernet.
-   
+
   Based on and modified from MQTTPubSubClient Library (https://github.com/hideakitai/MQTTPubSubClient)
-  
+
   Built by Khoi Hoang https://github.com/khoih-prog/MQTTPubSubClient_Generic
   Licensed under MIT license
  ***************************************************************************************************************************************/
@@ -43,15 +43,15 @@ void initEthernet()
 
 #if !(USE_BUILTIN_ETHERNET || USE_UIP_ETHERNET)
   // For other boards, to change if necessary
-  #if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+#if ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
   Ethernet.init (USE_THIS_SS_PIN);
 
-  #elif USE_CUSTOM_ETHERNET
+#elif USE_CUSTOM_ETHERNET
   // You have to add initialization for your Custom Ethernet here
   // This is just an example to setCSPin to USE_THIS_SS_PIN, and can be not correct and enough
   //Ethernet.init(USE_THIS_SS_PIN);
 
-  #endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
+#endif  //( ( USE_ETHERNET_GENERIC || USE_ETHERNET_ENC )
 #endif
 
   // start the ethernet connection and the server:
@@ -62,30 +62,34 @@ void initEthernet()
   Ethernet.begin(mac[index]);
 
   Serial.print(F("Connected! IP address: "));
-  Serial.println(Ethernet.localIP());  
+  Serial.println(Ethernet.localIP());
 }
 
-void setup() 
+void setup()
 {
   // Debug console
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print("\nStart EtherMQTT_STM32 on "); Serial.print(BOARD_NAME);
-  Serial.print(" with "); Serial.println(SHIELD_TYPE);
+  Serial.print("\nStart EtherMQTT_STM32 on ");
+  Serial.print(BOARD_NAME);
+  Serial.print(" with ");
+  Serial.println(SHIELD_TYPE);
   Serial.println(ETHERNET_WEBSERVER_STM32_VERSION);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
 
   initEthernet();
 
-  Serial.print("Connecting to host "); Serial.println(MQTT_SERVER);
-  
-  while (!client.connect(MQTT_SERVER, MQTT_PORT)) 
+  Serial.print("Connecting to host ");
+  Serial.println(MQTT_SERVER);
+
+  while (!client.connect(MQTT_SERVER, MQTT_PORT))
   {
     Serial.print(".");
     delay(1000);
   }
-  
+
   Serial.println("\nConnected!");
 
   // initialize mqtt client
@@ -105,7 +109,7 @@ void setup()
   mqttClient.subscribe([](const String & topic, const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.println("MQTT received: " + topic + " - " + payload);
   });
 
@@ -113,23 +117,24 @@ void setup()
   mqttClient.subscribe(PubTopic, [](const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.print("Subcribed to ");
-    Serial.print(PubTopic); Serial.print(" => ");
+    Serial.print(PubTopic);
+    Serial.print(" => ");
     Serial.println(payload);
   });
 
   mqttClient.publish(PubTopic, PubMessage);
 }
 
-void loop() 
+void loop()
 {
   mqttClient.update();  // should be called
 
   // publish message
   static uint32_t prev_ms = millis();
-  
-  if (millis() > prev_ms + 30000) 
+
+  if (millis() > prev_ms + 30000)
   {
     prev_ms = millis();
     mqttClient.publish(PubTopic, PubMessage);

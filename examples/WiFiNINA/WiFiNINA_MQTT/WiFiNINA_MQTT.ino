@@ -51,43 +51,47 @@ void setup()
 {
   // Debug console
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStart WiFiNINA_MQTT on ")); Serial.print(BOARD_NAME);
-  Serial.print(F(" with ")); Serial.println(SHIELD_TYPE);
+  Serial.print(F("\nStart WiFiNINA_MQTT on "));
+  Serial.print(BOARD_NAME);
+  Serial.print(F(" with "));
+  Serial.println(SHIELD_TYPE);
   Serial.println(WIFININA_GENERIC_VERSION);
   Serial.println(WIFI_WEBSERVER_VERSION);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
 
   /////////////////////////////////////
- 
+
   // check for the presence of the shield
   if (WiFi.status() == WL_NO_MODULE)
   {
     Serial.println(F("WiFi shield not present"));
+
     // don't continue
     while (true);
   }
 
   String fv = WiFi.firmwareVersion();
-  
+
   if (fv < WIFI_FIRMWARE_LATEST_VERSION)
   {
     Serial.println(F("Please upgrade the firmware"));
   }
-  
+
   Serial.print(F("Connecting to SSID: "));
   Serial.println(ssid);
-  
+
   status = WiFi.begin(ssid, pass);
 
   delay(1000);
-   
+
   // attempt to connect to WiFi network
   while ( status != WL_CONNECTED)
   {
     delay(500);
-        
+
     // Connect to WPA/WPA2 network
     status = WiFi.status();
   }
@@ -97,14 +101,15 @@ void setup()
 
   /////////////////////////////////////
 
-  Serial.print("Connecting to host "); Serial.println(MQTT_SERVER);
-  
-  while (!client.connect(MQTT_SERVER, MQTT_PORT)) 
+  Serial.print("Connecting to host ");
+  Serial.println(MQTT_SERVER);
+
+  while (!client.connect(MQTT_SERVER, MQTT_PORT))
   {
     Serial.print(".");
     delay(1000);
   }
-  
+
   Serial.println("\nConnected!");
 
   // initialize mqtt client
@@ -124,7 +129,7 @@ void setup()
   mqttClient.subscribe([](const String & topic, const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.println("MQTT received: " + topic + " - " + payload);
   });
 
@@ -132,23 +137,24 @@ void setup()
   mqttClient.subscribe(PubTopic, [](const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.print("Subcribed to ");
-    Serial.print(PubTopic); Serial.print(" => ");
+    Serial.print(PubTopic);
+    Serial.print(" => ");
     Serial.println(payload);
   });
 
   mqttClient.publish(PubTopic, PubMessage);
 }
 
-void loop() 
+void loop()
 {
   mqttClient.update();  // should be called
 
   // publish message
   static uint32_t prev_ms = millis();
-  
-  if (millis() > prev_ms + 30000) 
+
+  if (millis() > prev_ms + 30000)
   {
     prev_ms = millis();
     mqttClient.publish(PubTopic, PubMessage);

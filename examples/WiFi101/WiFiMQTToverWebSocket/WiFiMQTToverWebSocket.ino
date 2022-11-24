@@ -1,5 +1,5 @@
 /****************************************************************************************************************************
-  WiFiMQTTSecureAWS.ino
+  WiFiMQTToverWebSocket.ino
 
   MQTT and MQTT over WebSoket Client for Arduino
 
@@ -14,58 +14,27 @@
   Licensed under MIT license
  *****************************************************************************************************************************/
 
-// this example is based on
-// https://savjee.be/2019/07/connect-esp32-to-aws-iot-with-arduino-code/
-
-#if !( defined(ESP32) )
-  #error This code is intended to run on the ESP32 platform! Please check your Tools->Board setting.
-#endif
-
-#if defined(ESP32)
-  #include <WiFi.h>
-  #include <WiFiClientSecure.h>
-#else
-  #include <ESP8266WiFi.h>
-  #include <WiFiClientSecure.h>
-#endif
-
-#include <MQTTPubSubClient_Generic.h>
-
-#include <ArduinoJson.h>
-
-// The MQTTT endpoint for the device (unique for each AWS account but shared amongst devices within the account)
-const char* AWS_IOT_ENDPOINT = "your-endpoint.iot.ap-somewhre.amazonaws.com";
-
-#define AWS_IOT_PORT     8883
-
-// The name of the device MUST match up with the name defined in the AWS console
-const char* DEVICE_NAME = "your-device-name";
-
-// Amazon's root CA. This should be the same for everyone.
-const char AWS_CERT_CA[] =
-  "-----BEGIN CERTIFICATE-----\n"
-  "-----END CERTIFICATE-----\n";
-
-// The private key for your device
-const char AWS_CERT_PRIVATE[] =
-  "-----BEGIN RSA PRIVATE KEY-----\n"
-  "-----END RSA PRIVATE KEY-----\n";
-
-// The certificate for your device
-const char AWS_CERT_CRT[] =
-  "-----BEGIN CERTIFICATE-----\n"
-  "-----END CERTIFICATE-----\n";
-
-char ssid[] = "YOUR_SSID";        // your network SSID (name)
-char pass[] = "12345678";         // your network password
+#include "defines.h"
 
 int status = WL_IDLE_STATUS;     // the Wifi radio's status
 
-WiFiClientSecure client;
+#include <WebSocketsClient_Generic.h>  // include before MQTTPubSubClient.h
+
+#define MQTTPUBSUBCLIENT_USE_WEBSOCKETS     true
+
+#include <MQTTPubSubClient_Generic.h>
+
+WebSocketsClient client;
+
+//MQTTPubSub::PubSubClient<256> mqttClient;
 MQTTPubSubClient mqttClient;
 
-// Topic to publish
-const char *PubTopic    = "/mqttPubSub";
+//#define WS_SERVER         "192.168.2.30"
+#define WS_SERVER           "test.mosquitto.org"
+#define WS_PORT             8080
+
+const char *PubTopic    = "/mqttPubSub";                // Topic to publish
+const char *PubMessage  = "Hello from " BOARD_NAME " with " SHIELD_TYPE;     // Topic Message to publish
 
 void printWifiStatus()
 {
@@ -86,13 +55,56 @@ void printWifiStatus()
 
 void setup()
 {
+  // Debug console
   Serial.begin(115200);
 
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStart WiFiMQTTSecureAWS on "));
-  Serial.println(ARDUINO_BOARD);
+  Serial.print(F("\nStart WiFiMQTToverWebSocket on "));
+  Serial.print(BOARD_NAME);
+  Serial.print(F(" with "));
+  Serial.println(SHIELD_TYPE);
+  Serial.println(WIFI_WEBSERVER_VERSION);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
+
+#if WIFI_USING_ESP_AT
+
+  // initialize serial for ESP module
+  EspSerial.begin(115200);
+  // initialize ESP module
+  WiFi.init(&EspSerial);
+
+  Serial.println(F("WiFi shield init done"));
+
+#endif
+
+#if !(ESP32 || ESP8266)
+
+  // check for the presence of the shield
+#if USE_WIFI_NINA
+
+  if (WiFi.status() == WL_NO_MODULE)
+#else
+  if (WiFi.status() == WL_NO_SHIELD)
+#endif
+  {
+    Serial.println(F("WiFi shield not present"));
+
+    // don't continue
+    while (true);
+  }
+
+#if USE_WIFI_NINA
+  String fv = WiFi.firmwareVersion();
+
+  if (fv < WIFI_FIRMWARE_LATEST_VERSION)
+  {
+    Serial.println(F("Please upgrade the firmware"));
+  }
+
+#endif
+
+#endif
 
   Serial.print(F("Connecting to SSID: "));
   Serial.println(ssid);
@@ -113,31 +125,22 @@ void setup()
   // you're connected now, so print out the data
   printWifiStatus();
 
-  Serial.print("connecting to host...");
-  Serial.print("Connecting to secured-host:port = ");
-  Serial.print(AWS_IOT_ENDPOINT);
-  Serial.print(":");
-  Serial.println(AWS_IOT_PORT);
+  // server address, port and URL
+  Serial.print("Connecting to WebSockets Server @ ");
+  Serial.print(WS_SERVER);
+  Serial.print(", port ");
+  Serial.println(WS_PORT);
 
-  // connect to aws endpoint with certificates and keys
-  client.setCACert(AWS_CERT_CA);
-  client.setCertificate(AWS_CERT_CRT);
-  client.setPrivateKey(AWS_CERT_PRIVATE);
+  client.begin(WS_SERVER, WS_PORT, "/", "mqtt");  // "mqtt" is required
 
-  while (!client.connect(AWS_IOT_ENDPOINT, AWS_IOT_PORT))
-  {
-    Serial.print(".");
-    delay(1000);
-  }
-
-  Serial.println("\nConnected!");
+  client.setReconnectInterval(2000);
 
   // initialize mqtt client
   mqttClient.begin(client);
 
-  Serial.print("connecting to AWS MQTT broker...");
+  Serial.print("Connecting to mqtt broker...");
 
-  while (!mqttClient.connect(DEVICE_NAME))
+  while (!mqttClient.connect("arduino", "public", "public"))
   {
     Serial.print(".");
     delay(1000);
@@ -163,23 +166,20 @@ void setup()
     Serial.print(" => ");
     Serial.println(payload);
   });
+
+  mqttClient.publish(PubTopic, PubMessage);
 }
 
 void loop()
 {
-  mqttClient.update();
+  mqttClient.update();  // should be called
 
+  // publish message
   static uint32_t prev_ms = millis();
 
   if (millis() > prev_ms + 30000)
   {
     prev_ms = millis();
-
-    StaticJsonDocument<128> doc;
-    doc["from"] = "thing";
-    char buffer[128];
-    serializeJson(doc, buffer);
-
-    mqttClient.publish(PubTopic, buffer);
+    mqttClient.publish(PubTopic, PubMessage);
   }
 }

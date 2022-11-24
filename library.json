@@ -1,6 +1,6 @@
 {
   "name": "MQTTPubSubClient_Generic",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "MQTT, MQTT_over_WebSockets and Secured MQTT_over_WebSockets Client for Arduino. Supporting nRF52, SAMD21, SAMD51, STM32F/L/H/G/WB/MP1, Teensy, SAM DUE, RP2040-based boards, besides ESP8266, ESP32 (ESP32, ESP32_S2, ESP32_S3 and ESP32_C3) and WT32_ETH01. Ethernet shields W5100, W5200, W5500, ENC28J60, Teensy 4.1 NativeEthernet/QNEthernet. Ethernet_Generic library is used as default for W5x00. Now with newly-added support to Nano_RP2040_Connect using WiFiNINA_Generic library and RP2040W using CYW43439 WiFi",
   "keywords": "mqtt, websocket, wifi, ethernet, tcp",
   "authors": 
@@ -34,19 +34,19 @@
     {
       "owner": "khoih-prog",
       "name": "WiFiNINA_Generic",
-      "version": ">=1.8.14-6",
+      "version": ">=1.8.15-1",
       "platforms": ["*"]
     },
     {
       "owner": "khoih-prog",
       "name": "WiFiWebServer",
-      "version": ">=1.9.5",
+      "version": ">=1.10.1",
       "platforms": ["*"]
     },
     {
       "owner": "khoih-prog",
       "name": "EthernetWebServer",
-      "version": ">=2.2.3",
+      "version": ">=2.3.0",
       "platforms": ["*"]
     },
     {
@@ -94,23 +94,25 @@
     {
       "owner": "khoih-prog",
       "name": "Ethernet_Generic",
-      "version": "^2.6.1",
+      "version": "^2.7.1",
       "platforms": ["*"]
     },
     {
       "owner": "khoih-prog",
       "name": "WebSockets_Generic",
-      "version": "^2.16.0",
+      "version": "^2.16.1",
       "platforms": ["*"]
     },
     {
-      "name": "WiFi101",
-      "version": "https://github.com/khoih-prog/WiFi101"
+      "owner": "khoih-prog",
+      "name": "WiFi101_Generic",
+      "version": "^1.0.0",
+      "platforms": ["*"]
     },
     {
       "owner": "ssilverman",
       "name": "QNEthernet",
-      "version": ">=0.15.0",
+      "version": ">=0.16.0",
       "platforms": ["teensy"]
     }
   ],

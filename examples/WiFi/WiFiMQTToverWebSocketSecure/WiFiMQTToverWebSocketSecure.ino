@@ -68,9 +68,11 @@ void printWifiStatus()
 void setup()
 {
   Serial.begin(115200);
+
   while (!Serial && millis() < 5000);
 
-  Serial.print(F("\nStart WiFiMQTToverWebSocketSecure on ")); Serial.println(ARDUINO_BOARD);
+  Serial.print(F("\nStart WiFiMQTToverWebSocketSecure on "));
+  Serial.println(ARDUINO_BOARD);
   Serial.println(MQTT_PUBSUB_CLIENT_GENERIC_VERSION);
 
   Serial.print(F("Connecting to SSID: "));
@@ -92,11 +94,13 @@ void setup()
   // you're connected now, so print out the data
   printWifiStatus();
 
-  Serial.print("Connecting to secured-host:port = "); Serial.print(WS_SERVER); 
-  Serial.print(":"); Serial.println(WS_PORT); 
-  
-  client.beginSSL(WS_SERVER, WS_PORT); 
-  
+  Serial.print("Connecting to secured-host:port = ");
+  Serial.print(WS_SERVER);
+  Serial.print(":");
+  Serial.println(WS_PORT);
+
+  client.beginSSL(WS_SERVER, WS_PORT);
+
   client.setReconnectInterval(2000);
 
   // initialize mqtt client
@@ -116,7 +120,7 @@ void setup()
   mqttClient.subscribe([](const String & topic, const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.println("MQTT received: " + topic + " - " + payload);
   });
 
@@ -124,23 +128,24 @@ void setup()
   mqttClient.subscribe(PubTopic, [](const String & payload, const size_t size)
   {
     (void) size;
-    
+
     Serial.print("Subcribed to ");
-    Serial.print(PubTopic); Serial.print(" => ");
+    Serial.print(PubTopic);
+    Serial.print(" => ");
     Serial.println(payload);
   });
 
   mqttClient.publish(PubTopic, PubMessage);
 }
 
-void loop() 
+void loop()
 {
   mqttClient.update();  // should be called
 
   // publish message
   static uint32_t prev_ms = millis();
-  
-  if (millis() > prev_ms + 30000) 
+
+  if (millis() > prev_ms + 30000)
   {
     prev_ms = millis();
     mqttClient.publish(PubTopic, PubMessage);
